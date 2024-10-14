@@ -102,12 +102,6 @@
             "projectReferences": {
               "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
                 "projectPath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
-              },
-              "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
-              },
-              "D:\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj": {
-                "projectPath": "D:\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj"
               }
             }
           }
@@ -124,6 +118,36 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.Extensions.Configuration": {
+              "target": "Package",
+              "version": "[6.0.1, )"
+            },
+            "Microsoft.Extensions.Configuration.Json": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -264,6 +288,9 @@
               "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
                 "projectPath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
               },
+              "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
+              },
               "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj": {
                 "projectPath": "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj"
               }
@@ -283,6 +310,20 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[6.0.31, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.5.0, )"
