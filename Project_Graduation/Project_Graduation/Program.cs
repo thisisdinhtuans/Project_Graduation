@@ -18,6 +18,8 @@ builder.Services.AddDbContext<Project_Graduation_Context>(opt=>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
 
+builder.Services.AddCors();
+
 builder.Services.AddIdentityCore<AppUser>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
@@ -33,6 +35,11 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(opt=>
+{
+    opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
+})
 
 app.UseHttpsRedirection();
 

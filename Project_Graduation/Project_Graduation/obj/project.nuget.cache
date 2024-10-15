@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "a8x4112DAQN4K0fFwYZrw584rE/EMvhQt4cfNUyIv9B8XE3kZZSPzKiSsPpw4s/jmoJs6xx3wjBFvlsWt1RiIA==",
+  "dgSpecHash": "GfzVq7tD3lpfbSuBRhLg7mw2Otdyl9v2ud/4MqXEPGkk1lBUpQN3iWsfU83T4k23xY79i8u8IYuA5zrhrtZ3yw==",
   "success": true,
   "projectFilePath": "D:\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj",
   "expectedPackageFiles": [
@@ -66,8 +66,8 @@
     "C:\\Users\\AD\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.25\\microsoft.netcore.app.host.win-x64.6.0.25.nupkg.sha512"
   ],
