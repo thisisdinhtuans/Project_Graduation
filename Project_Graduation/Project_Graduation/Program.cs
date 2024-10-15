@@ -1,6 +1,7 @@
 using API.Data;
 using Infrastructure.Data;
 using Infrastructure.Entities;
+using Library.Extensions.Middleware;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,6 +29,7 @@ builder.Services.AddIdentityCore<AppUser>(opt =>
     .AddEntityFrameworkStores<Project_Graduation_Context>();
 
 var app = builder.Build();
+app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -39,7 +41,7 @@ if (app.Environment.IsDevelopment())
 app.UseCors(opt=>
 {
     opt.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:3000");
-})
+});
 
 app.UseHttpsRedirection();
 
