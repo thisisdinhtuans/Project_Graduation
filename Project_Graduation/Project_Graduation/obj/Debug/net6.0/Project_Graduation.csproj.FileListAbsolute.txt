@@ -79,3 +79,9 @@ D:\DoAn\Project_Graduation\Project_Graduation\obj\Debug\net6.0\Project_Graduatio
 D:\DoAn\Project_Graduation\Project_Graduation\obj\Debug\net6.0\Project_Graduation.genruntimeconfig.cache
 D:\DoAn\Project_Graduation\Project_Graduation\obj\Debug\net6.0\ref\Project_Graduation.dll
 D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.Extensions.Configuration.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.DotNet.PlatformAbstractions.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.Extensions.DependencyModel.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Newtonsoft.Json.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\System.Text.Json.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
