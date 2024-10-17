@@ -1,4 +1,5 @@
 using System;
+using System.Linq.Expressions;
 
 namespace Infrastructure.Repositories.BaseRepository;
 
@@ -11,5 +12,6 @@ public interface IBaseRepository<T>
     Task<bool> Update(T entity);
     Task<bool> Delete(T entity);
     Task<bool> SaveAllAsync();
+    Task<bool> AnyAsync(Expression<Func<T, bool>> expression);
 
 }

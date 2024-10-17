@@ -20,23 +20,50 @@ public class RestaurantService: IRestaurantService
     }
     public async Task<ApiResult<Restaurant>> CreateRestaurantAsync(CreateRestaurantDto restaurantDto)
     {
+        if (restaurantDto == null)
+        {
+            throw new ArgumentNullException(nameof(restaurantDto));
+        }
+
+        var addressExists = await _restaurantRepository.AnyAsync(x => x.Address == restaurantDto.Address);
+        if (addressExists)
+        {
+            return new ApiErrorResult<Restaurant>("Nhà hàng với địa chỉ này đã tồn tại.");
+        }
+
+
         var restaurant = _mapper.Map<Restaurant>(restaurantDto);
         // restaurant.CreatedBy=_httpContextAccessor.HttpContext.User.Identity.Name;
         // restaurant.CreatedDate=DateTime.Now;
-        _restaurantRepository.AddAsync(restaurant);
+        var result = await _restaurantRepository.AddAsync(restaurant);
+
+        if (!result)
+        {
+            return new ApiErrorResult<Restaurant>("Lỗi khi lưu");
+        }
 
         return new ApiSuccessResult<Restaurant>(restaurant);
     }
 
     public async Task<ApiResult<Restaurant>> UpdateRestaurantAsync(RestaurantDto restaurantDto)
     {
+        var addressExists = await _restaurantRepository.AnyAsync(x => x.Address == restaurantDto.Address);
+            if (addressExists)
+            {
+                return new ApiErrorResult<Restaurant>("Nhà hàng với địa chỉ này đã tồn tại.");
+            }
+
         var restaurant = await _restaurantRepository.GetByIdAsync(restaurantDto.RestaurantID);
         if (restaurant == null) throw new Exception("Restaurant not found");
 
         _mapper.Map(restaurantDto, restaurant);
         // restaurant.UpdatedDate = DateTime.Now;
         // restaurant.UpdatedBy = _httpContextAccessor.HttpContext.User.Identity.Name;
-        _restaurantRepository.Update(restaurant);
+        var result = await _restaurantRepository.Update(restaurant);
+        if(!result)
+        {
+            return new ApiErrorResult<Restaurant>("Lỗi khi lưu");
+        }
 
         return new ApiSuccessResult<Restaurant>(restaurant);
     }
@@ -46,7 +73,7 @@ public class RestaurantService: IRestaurantService
         var restaurant = await _restaurantRepository.GetByIdAsync(id);
         if (restaurant == null)
         {
-            return new ApiErrorResult<bool>("Restaurant not found.");
+            return new ApiErrorResult<bool>("Nhà hàng không được tìm thấy.");
         }
 
         var result = await _restaurantRepository.Delete(restaurant); 

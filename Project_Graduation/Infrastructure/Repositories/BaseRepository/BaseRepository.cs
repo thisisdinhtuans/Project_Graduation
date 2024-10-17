@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq.Expressions;
 using Infrastructure.Data;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.AuditRepository;
@@ -59,4 +60,9 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntit
     {
         return await _dbSet.ToListAsync();
     }
+    public async Task<bool> AnyAsync(Expression<Func<T, bool>> expression)
+        {
+            return await _dbSet.AnyAsync(expression);
+        }
+
 }

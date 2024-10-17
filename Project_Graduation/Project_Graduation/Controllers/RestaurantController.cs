@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Restaurant;
 using Infrastructure.Entities;
@@ -33,7 +33,7 @@ public class RestaurantsController : BaseApiController
             return BadRequest();
         }
         var restaurants = await _restaurantService.GetAllRestaurantsAsync();
-        return Ok(restaurants); // Tr? v? danh s�ch c�c nh� h�ng
+        return Ok(restaurants); // Tr? v? danh sách các nhà hàng
     }
 
     [HttpGet("{id}", Name = "GetRestaurant")]
@@ -83,7 +83,7 @@ public class RestaurantsController : BaseApiController
         }
 
         var result = await _restaurantService.DeleteRestaurantAsync(id);
-        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Problem deleting restaurant" });
+        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi xóa nhà hàng" });
         return NoContent();
     }
 }
