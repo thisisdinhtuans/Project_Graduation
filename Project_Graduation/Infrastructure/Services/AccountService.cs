@@ -19,16 +19,24 @@ public class AccountService: IAccountService
 
         public async Task<UserDto> LoginAsync(LoginRequestDto loginDto)
         {
+            // Find user by username
             var user = await _userManager.FindByNameAsync(loginDto.UserName);
+            
+            // Check if user exists and password is valid
             if (user == null || !await _userManager.CheckPasswordAsync(user, loginDto.PassWord))
                 return null;
 
+            // Return user details along with JWT token
             return new UserDto
             {
-                Email = user.Email,
-                Token = await _tokenService.GenerateToken(user),
+                UserName = user.UserName,        // Username
+                FullName = user.FullName,        // Full Name
+                Email = user.Email,              // Email
+                PhoneNumber = user.PhoneNumber,  // Phone number (if needed)
+                Token = await _tokenService.GenerateToken(user), // JWT Token
             };
         }
+
 
 
     public async Task<IdentityResult> RegisterAsync(RegisterDto registerDto)

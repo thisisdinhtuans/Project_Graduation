@@ -85,3 +85,5 @@ D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Newtonsoft.Json.d
 D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\System.Text.Json.dll
 D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\Microsoft.IdentityModel.Abstractions.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\AutoMapper.dll
+D:\DoAn\Project_Graduation\Project_Graduation\bin\Debug\net6.0\AutoMapper.Extensions.Microsoft.DependencyInjection.dll

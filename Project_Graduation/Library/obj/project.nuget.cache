@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "qLlt9W08QyTrh4iolpg2OqGRbFhqcP0ZrAkW3Wg6OqhTU8+5V5AjHPTDgeqHNDFEF4wnHvoCQDqx27gqtOOZCg==",
+  "dgSpecHash": "AjPxQtUEqkGKa1d37/WOiP5caYG6CnimRxUovP21/0TCVVf9sbgYclyNdpIsIalABIIYndbbpwHDLScTVI4EDQ==",
   "success": true,
   "projectFilePath": "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\AD\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.1.1\\microsoft.aspnetcore.authentication.abstractions.2.1.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.authentication.core\\2.1.1\\microsoft.aspnetcore.authentication.core.2.1.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.authorization\\2.1.1\\microsoft.aspnetcore.authorization.2.1.1.nupkg.sha512",
@@ -23,7 +25,7 @@
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.routing\\2.1.1\\microsoft.aspnetcore.routing.2.1.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.routing.abstractions\\2.1.1\\microsoft.aspnetcore.routing.abstractions.2.1.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.webutilities\\2.1.1\\microsoft.aspnetcore.webutilities.2.1.1.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.csharp\\4.5.0\\microsoft.csharp.4.5.0.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.data.sqlclient\\2.1.7\\microsoft.data.sqlclient.2.1.7.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.data.sqlclient.sni.runtime\\2.1.1\\microsoft.data.sqlclient.sni.runtime.2.1.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.dotnet.platformabstractions\\2.1.0\\microsoft.dotnet.platformabstractions.2.1.0.nupkg.sha512",

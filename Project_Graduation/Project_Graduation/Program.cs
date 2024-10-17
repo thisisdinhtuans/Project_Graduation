@@ -3,19 +3,22 @@ using API.Data;
 using Domain.Features;
 using Infrastructure.Data;
 using Infrastructure.Entities;
+using Infrastructure.Repositories.AuditRepository;
 using Infrastructure.Services;
+using Infrastructure.Services.RestaurantService;
 using Library.Extensions.Middleware;
+using Library.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -51,6 +54,13 @@ builder.Services.AddDbContext<Project_Graduation_Context>(opt=>
     opt.UseSqlServer(builder.Configuration.GetConnectionString("SqlConnection"));
 });
 builder.Services.AddScoped<IAccountService, AccountService>();
+
+builder.Services.AddScoped(typeof(IAuditRepository<>), typeof(AuditRepository<>));
+
+builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
+builder.Services.AddScoped<IRestaurantService, RestaurantService>();
+
+
 builder.Services.AddCors();
 
 builder.Services.AddIdentityCore<AppUser>(opt =>
@@ -73,8 +83,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     }
 );
+// builder.Services.AddReponsitories();
 builder.Services.AddScoped<TokenService>();
-
+builder.Services.AddHttpContextAccessor();
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
@@ -90,8 +101,9 @@ app.UseCors(opt=>
     opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
 });
 
-app.UseHttpsRedirection();
 
+app.UseHttpsRedirection();
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers();
