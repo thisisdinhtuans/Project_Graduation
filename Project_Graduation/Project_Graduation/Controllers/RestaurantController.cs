@@ -1,4 +1,5 @@
 using System;
+using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Restaurant;
 using Infrastructure.Entities;
 using Infrastructure.Services.RestaurantService;
@@ -25,8 +26,12 @@ public class RestaurantsController : BaseApiController
     // }
 
     [HttpGet]
-    public async Task<ActionResult<List<RestaurantDto>>> GetAllRestaurants()
+    public async Task<IActionResult> GetAllRestaurants()
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
         var restaurants = await _restaurantService.GetAllRestaurantsAsync();
         return Ok(restaurants); // Tr? v? danh sách các nhà hàng
     }
@@ -34,6 +39,10 @@ public class RestaurantsController : BaseApiController
     [HttpGet("{id}", Name = "GetRestaurant")]
     public async Task<ActionResult<Restaurant>> GetRestaurant(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
         var restaurant = await _restaurantService.GetRestaurantByIdAsync(id);
         if (restaurant == null) return NotFound();
         return Ok(restaurant);
@@ -44,14 +53,22 @@ public class RestaurantsController : BaseApiController
     [HttpPost]
     public async Task<ActionResult<Restaurant>> CreateRestaurant([FromBody] CreateRestaurantDto restaurantDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
         var restaurant = await _restaurantService.CreateRestaurantAsync(restaurantDto);
-        return CreatedAtRoute("GetRestaurant", new { Id = restaurant.RestaurantID }, restaurant);
+        return Ok(restaurant);
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPut]
     public async Task<ActionResult<Restaurant>> UpdateRestaurant([FromBody] RestaurantDto restaurantDto)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
         var restaurant = await _restaurantService.UpdateRestaurantAsync(restaurantDto);
         return Ok(restaurant);
     }
@@ -60,8 +77,13 @@ public class RestaurantsController : BaseApiController
     [HttpDelete("{id}")]
     public async Task<ActionResult> DeleteRestaurant(int id)
     {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest();
+        }
+
         var result = await _restaurantService.DeleteRestaurantAsync(id);
-        if (!result) return BadRequest(new ProblemDetails { Title = "Problem deleting restaurant" });
+        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Problem deleting restaurant" });
         return NoContent();
     }
 }

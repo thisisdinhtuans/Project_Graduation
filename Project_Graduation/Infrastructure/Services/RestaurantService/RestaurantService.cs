@@ -1,5 +1,7 @@
 ﻿using System;
 using AutoMapper;
+using Domain.Models.Common;
+using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Restaurant;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Http;
@@ -16,17 +18,17 @@ public class RestaurantService: IRestaurantService
         _restaurantRepository = restaurantRepository;
         _mapper = mapper;
     }
-    public async Task<Restaurant> CreateRestaurantAsync(CreateRestaurantDto restaurantDto)
+    public async Task<ApiResult<Restaurant>> CreateRestaurantAsync(CreateRestaurantDto restaurantDto)
     {
         var restaurant = _mapper.Map<Restaurant>(restaurantDto);
         // restaurant.CreatedBy=_httpContextAccessor.HttpContext.User.Identity.Name;
         // restaurant.CreatedDate=DateTime.Now;
         _restaurantRepository.AddAsync(restaurant);
-        
-        return restaurant;
+
+        return new ApiSuccessResult<Restaurant>(restaurant);
     }
 
-    public async Task<Restaurant> UpdateRestaurantAsync(RestaurantDto restaurantDto)
+    public async Task<ApiResult<Restaurant>> UpdateRestaurantAsync(RestaurantDto restaurantDto)
     {
         var restaurant = await _restaurantRepository.GetByIdAsync(restaurantDto.RestaurantID);
         if (restaurant == null) throw new Exception("Restaurant not found");
@@ -36,25 +38,32 @@ public class RestaurantService: IRestaurantService
         // restaurant.UpdatedBy = _httpContextAccessor.HttpContext.User.Identity.Name;
         _restaurantRepository.Update(restaurant);
 
-        return restaurant;
+        return new ApiSuccessResult<Restaurant>(restaurant);
     }
 
-    public async Task<bool> DeleteRestaurantAsync(int id)
+    public async Task<ApiResult<bool>> DeleteRestaurantAsync(int id)
     {
         var restaurant = await _restaurantRepository.GetByIdAsync(id);
-        if (restaurant == null) return false;
+        if (restaurant == null)
+        {
+            return new ApiErrorResult<bool>("Restaurant not found.");
+        }
 
-        return await _restaurantRepository.Delete(restaurant);
+        var result = await _restaurantRepository.Delete(restaurant); 
+        return new ApiSuccessResult<bool>(result); 
     }
 
-    public async Task<Restaurant> GetRestaurantByIdAsync(int id)
+
+    public async Task<ApiResult<Restaurant>> GetRestaurantByIdAsync(int id)
     {
-        return await _restaurantRepository.GetByIdAsync(id);
+        var restaurant= await _restaurantRepository.GetByIdAsync(id);
+        return new ApiSuccessResult<Restaurant>(restaurant);
     }
 
-    public async Task<List<RestaurantDto>> GetAllRestaurantsAsync()
+    public async Task<ApiResult<List<RestaurantDto>>> GetAllRestaurantsAsync()
     {
         var restaurants = await _restaurantRepository.GetAllAsync(); // Lấy tất cả nhà hàng từ Repository
-        return _mapper.Map<List<RestaurantDto>>(restaurants); // Chuyển đổi sang DTO
+        var restaurantsDto=_mapper.Map<List<RestaurantDto>>(restaurants); // Chuyển đổi sang DTO
+        return new ApiSuccessResult<List<RestaurantDto>>(restaurantsDto);
     }
 }
