@@ -1,5 +1,5 @@
 ﻿using System;
-using Domain.Models.Common.ApiResult;
+using AutoMapper;
 using Domain.Models.Dto.Restaurant;
 using Infrastructure.Entities;
 using Infrastructure.Services.RestaurantService;
@@ -11,10 +11,12 @@ namespace Project_Graduation.Controllers;
 public class RestaurantsController : BaseApiController
 {
     private readonly IRestaurantService _restaurantService;
+    private readonly IMapper _mapper;
 
-    public RestaurantsController(IRestaurantService restaurantService)
+    public RestaurantsController(IRestaurantService restaurantService, IMapper mapper)
     {
         _restaurantService = restaurantService;
+        _mapper = mapper;
     }
 
     // [HttpGet]
@@ -51,26 +53,28 @@ public class RestaurantsController : BaseApiController
 
     [Authorize(Roles = "Admin,Manager")]
     [HttpPost]
-    public async Task<ActionResult<Restaurant>> CreateRestaurant([FromBody] CreateRestaurantDto restaurantDto)
+    public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto restaurantDto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
-        var restaurant = await _restaurantService.CreateRestaurantAsync(restaurantDto);
-        return Ok(restaurant);
+        var result = await _restaurantService.CreateRestaurantAsync(restaurantDto);
+        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi thêm nhà hàng" });
+        return NoContent();
     }
 
     [Authorize(Roles = "Admin")]
     [HttpPut]
-    public async Task<ActionResult<Restaurant>> UpdateRestaurant([FromBody] RestaurantDto restaurantDto)
+    public async Task<ActionResult> UpdateRestaurant([FromBody] RestaurantDto restaurantDto)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest();
         }
-        var restaurant = await _restaurantService.UpdateRestaurantAsync(restaurantDto);
-        return Ok(restaurant);
+        var result = await _restaurantService.UpdateRestaurantAsync(restaurantDto);
+        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi cập nhật nhà hàng" });
+        return NoContent();
     }
 
     [Authorize(Roles = "Admin")]

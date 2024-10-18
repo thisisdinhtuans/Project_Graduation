@@ -1,5 +1,6 @@
 using System;
 using AutoMapper;
+using Domain.Models.Dto.Area;
 using Domain.Models.Dto.Restaurant;
 using Infrastructure.Entities;
 
@@ -12,6 +13,10 @@ public class MappingProfiles: Profile
             CreateMap<CreateRestaurantDto, Restaurant>();
             CreateMap<RestaurantDto, Restaurant>();
             CreateMap<Restaurant,RestaurantDto>();
+
+            CreateMap<CreateAreaDto, Area>();
+            CreateMap<AreaDto, Area>();
+            CreateMap<Area,AreaDto>();
 
     }
 }

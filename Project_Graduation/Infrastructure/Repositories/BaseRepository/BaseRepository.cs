@@ -29,30 +29,29 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntit
         return await _dbSet.ToListAsync();
     }
 
-    public async Task<bool> AddAsync(T entity)
+    public async Task Add(T entity)
     {
         _auditRepository.SetAuditForCreate(entity);
         await _dbSet.AddAsync(entity);
-        return await SaveAllAsync();
+        await SaveAllAsync();
     }
 
-    public async Task<bool> Update(T entity)
+    public async Task Update(T entity)
     {
         _auditRepository.SetAuditForUpdate(entity);
         _dbSet.Update(entity);
-        return await SaveAllAsync();
+        await SaveAllAsync();
     }
 
-    public async Task<bool> Delete(T entity)
+    public async Task Delete(T entity)
     {
         _dbSet.Remove(entity);
-        return await SaveAllAsync();
+        await SaveAllAsync();
     }
 
-    public async Task<bool> SaveAllAsync()
+    public async Task SaveAllAsync()
     {
-        var saved = await _context.SaveChangesAsync(); // Sử dụng SaveChangesAsync() để lưu dữ liệu bất đồng bộ
-        return saved > 0;
+        await _context.SaveChangesAsync(); // Sử dụng SaveChangesAsync() để lưu dữ liệu bất đồng bộ
     }
 
 

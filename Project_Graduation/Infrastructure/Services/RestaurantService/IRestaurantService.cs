@@ -9,7 +9,7 @@ public interface IRestaurantService
 {
     Task<ApiResult<List<RestaurantDto>>> GetAllRestaurantsAsync();
     Task<ApiResult<Restaurant>> GetRestaurantByIdAsync(int id);
-    Task<ApiResult<Restaurant>> CreateRestaurantAsync(CreateRestaurantDto restaurantDto);
-    Task<ApiResult<Restaurant>> UpdateRestaurantAsync(RestaurantDto restaurantDto);
+    Task<ApiResult<bool>> CreateRestaurantAsync(CreateRestaurantDto restaurantDto);
+    Task<ApiResult<bool>> UpdateRestaurantAsync(RestaurantDto restaurantDto);
     Task<ApiResult<bool>> DeleteRestaurantAsync(int id);
 }

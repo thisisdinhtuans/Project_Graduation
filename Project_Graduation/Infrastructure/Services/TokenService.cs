@@ -42,8 +42,8 @@ public class TokenService
 
             //thiết lập cấu hình token
             var tokenOptions = new JwtSecurityToken(
-                issuer: null,
-                audience: null,
+                issuer: null,     // Đọc từ cấu hình
+                audience: null, // Đọc từ cấu hình
                 claims: claims,
                 //thời gian hết hạn của token
                 expires: DateTime.Now.AddDays(7),

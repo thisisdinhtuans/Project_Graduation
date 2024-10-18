@@ -1,10 +1,13 @@
 using System.Text;
+using System.Text.Json.Serialization;
 using API.Data;
 using Domain.Features;
 using Infrastructure.Data;
 using Infrastructure.Entities;
+using Infrastructure.Repositories.AreaRepository;
 using Infrastructure.Repositories.AuditRepository;
 using Infrastructure.Services;
+using Infrastructure.Services.AreaService;
 using Infrastructure.Services.RestaurantService;
 using Library.Extensions.Middleware;
 using Library.Mapper;
@@ -18,6 +21,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -60,6 +64,8 @@ builder.Services.AddScoped(typeof(IAuditRepository<>), typeof(AuditRepository<>)
 builder.Services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
+builder.Services.AddScoped<IAreaRepository, AreaRepository>();
+builder.Services.AddScoped<IAreaService, AreaService>();
 
 builder.Services.AddCors();
 
