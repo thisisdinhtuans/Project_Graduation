@@ -2,6 +2,7 @@ using System;
 using AutoMapper;
 using Domain.Models.Dto.Area;
 using Domain.Models.Dto.Restaurant;
+using Domain.Models.Dto.Table;
 using Infrastructure.Entities;
 
 namespace Library.Mapper;
@@ -17,6 +18,10 @@ public class MappingProfiles: Profile
             CreateMap<CreateAreaDto, Area>();
             CreateMap<AreaDto, Area>();
             CreateMap<Area,AreaDto>();
+
+            CreateMap<CreateTableDto, Table>();
+            CreateMap<TableDto, Table>();
+            CreateMap<Table, TableDto>();
 
     }
 }

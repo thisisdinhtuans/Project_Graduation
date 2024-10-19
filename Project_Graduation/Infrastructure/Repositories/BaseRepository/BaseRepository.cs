@@ -33,7 +33,7 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntit
     {
         _auditRepository.SetAuditForCreate(entity);
         await _dbSet.AddAsync(entity);
-        await SaveAllAsync();
+        await SaveAllAsync();   
     }
 
     public async Task Update(T entity)

@@ -22,7 +22,7 @@ public class AreaService: IAreaService
     }
     public async Task<ApiResult<bool>> CreateAreaAsync(CreateAreaDto areaDto)
     {
-        var restaurant = _restaurantRepository.GetByIdAsync(areaDto.RestaurantID);
+        var restaurant =await _restaurantRepository.GetByIdAsync(areaDto.RestaurantID);
         if(restaurant==null)
         {
             return new ApiErrorResult<bool>("Nhà hàng này không tồn tại");
