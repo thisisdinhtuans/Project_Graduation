@@ -1,6 +1,7 @@
 using System;
 using AutoMapper;
 using Domain.Models.Dto.Area;
+using Domain.Models.Dto.Blog;
 using Domain.Models.Dto.Restaurant;
 using Domain.Models.Dto.Table;
 using Infrastructure.Entities;
@@ -22,6 +23,9 @@ public class MappingProfiles: Profile
             CreateMap<CreateTableDto, Table>();
             CreateMap<TableDto, Table>();
             CreateMap<Table, TableDto>();
+
+            CreateMap<BlogDto, Blog>();
+            CreateMap<Blog, BlogDto>();
 
     }
 }
