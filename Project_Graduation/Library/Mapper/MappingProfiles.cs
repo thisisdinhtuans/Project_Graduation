@@ -3,6 +3,7 @@ using AutoMapper;
 using Domain.Models.Dto.Area;
 using Domain.Models.Dto.Blog;
 using Domain.Models.Dto.Category;
+using Domain.Models.Dto.Dish;
 using Domain.Models.Dto.Restaurant;
 using Domain.Models.Dto.Table;
 using Infrastructure.Entities;
@@ -32,6 +33,10 @@ public class MappingProfiles: Profile
             CreateMap<CreateCategoryDto, Category>();
             CreateMap<CategoryDto, Category>();
             CreateMap<Category, CategoryDto>();
+
+            CreateMap<CreateDishDto, Dish>();
+            CreateMap<DishDto, Dish>();
+            CreateMap<Dish, DishDto>();
 
     }
 }
