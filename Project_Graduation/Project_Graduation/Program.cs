@@ -7,10 +7,12 @@ using Infrastructure.Entities;
 using Infrastructure.Repositories.AreaRepository;
 using Infrastructure.Repositories.AuditRepository;
 using Infrastructure.Repositories.BlogRepository;
+using Infrastructure.Repositories.CategoryRepository;
 using Infrastructure.Repositories.TableRepository;
 using Infrastructure.Services;
 using Infrastructure.Services.AreaService;
 using Infrastructure.Services.BlogService;
+using Infrastructure.Services.CategoryService;
 using Infrastructure.Services.RestaurantService;
 using Infrastructure.Services.TableService;
 using Library.Extensions.Middleware;
@@ -76,6 +78,9 @@ builder.Services.AddScoped<ITableService, TableService>();
 
 builder.Services.AddScoped<IBlogRepository, BlogRepository>();
 builder.Services.AddScoped<IBlogService, BlogService>();
+
+builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddCors();
 
