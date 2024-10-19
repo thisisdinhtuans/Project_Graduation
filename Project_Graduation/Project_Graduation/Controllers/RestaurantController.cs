@@ -60,8 +60,9 @@ public class RestaurantsController : BaseApiController
             return BadRequest();
         }
         var result = await _restaurantService.CreateRestaurantAsync(restaurantDto);
-        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi thêm nhà hàng" });
-        return NoContent();
+        //if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi thêm nhà hàng" });
+        //return NoContent();
+        return Ok(result);
     }
 
     [Authorize(Roles = "Admin")]
@@ -73,8 +74,9 @@ public class RestaurantsController : BaseApiController
             return BadRequest();
         }
         var result = await _restaurantService.UpdateRestaurantAsync(restaurantDto);
-        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi cập nhật nhà hàng" });
-        return NoContent();
+        // if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi cập nhật nhà hàng" });
+        // return NoContent();
+        return Ok(result);
     }
 
     [Authorize(Roles = "Admin")]
@@ -87,7 +89,8 @@ public class RestaurantsController : BaseApiController
         }
 
         var result = await _restaurantService.DeleteRestaurantAsync(id);
-        if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi xóa nhà hàng" });
-        return NoContent();
+        //if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi xóa nhà hàng" });
+        //return NoContent();
+        return Ok(result);
     }
 }

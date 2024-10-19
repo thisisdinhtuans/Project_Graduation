@@ -6,9 +6,11 @@ using Infrastructure.Data;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.AreaRepository;
 using Infrastructure.Repositories.AuditRepository;
+using Infrastructure.Repositories.TableRepository;
 using Infrastructure.Services;
 using Infrastructure.Services.AreaService;
 using Infrastructure.Services.RestaurantService;
+using Infrastructure.Services.TableService;
 using Library.Extensions.Middleware;
 using Library.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -66,6 +68,9 @@ builder.Services.AddScoped<IRestaurantService, RestaurantService>();
 
 builder.Services.AddScoped<IAreaRepository, AreaRepository>();
 builder.Services.AddScoped<IAreaService, AreaService>();
+
+builder.Services.AddScoped<ITableRepository, TableRepository>();
+builder.Services.AddScoped<ITableService, TableService>();
 
 builder.Services.AddCors();
 
