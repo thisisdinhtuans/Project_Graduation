@@ -16,6 +16,7 @@ using Infrastructure.Services.BlogService;
 using Infrastructure.Services.CategoryService;
 using Infrastructure.Services.DishService;
 using Infrastructure.Services.RestaurantService;
+using Infrastructure.Services.RoleService;
 using Infrastructure.Services.TableService;
 using Library.Extensions.Middleware;
 using Library.Mapper;
@@ -86,6 +87,9 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddScoped<IDishRepository, DishRepository>();
 builder.Services.AddScoped<IDishService, DishService>();
+
+builder.Services.AddScoped<IRoleService, RoleService>();
+
 
 builder.Services.AddCors();
 
