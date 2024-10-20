@@ -18,6 +18,7 @@ using Infrastructure.Services.DishService;
 using Infrastructure.Services.RestaurantService;
 using Infrastructure.Services.RoleService;
 using Infrastructure.Services.TableService;
+using Infrastructure.Services.UserService;
 using Library.Extensions.Middleware;
 using Library.Mapper;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -89,6 +90,8 @@ builder.Services.AddScoped<IDishRepository, DishRepository>();
 builder.Services.AddScoped<IDishService, DishService>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
+
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 builder.Services.AddCors();
