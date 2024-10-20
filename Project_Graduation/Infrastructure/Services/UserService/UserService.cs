@@ -52,6 +52,9 @@ public class UserService : IUserService
                 Roles = roles,
                 Dob = user.Dob,
                 Gender = user.Gender,
+                CCCD=user.CCCD,
+                RestaurantID=user.RestaurantID
+                
                 //Opes = (userOperations != null && operations != null)
                 //    ? userOperations.Join(operations, x1 => x1.OperationId, x2 => x2.Id, (x1, x2) => x2.Name).ToList()
                 //    : new List<string>()

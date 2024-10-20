@@ -31,6 +31,6 @@ public class UserRequestDto
         public IList<string>? Roles { get; set; }
         public List<string>? Opes { get; set; }
 
-        public int RestaurantID { get; set; }
-        public int Status { get; set; }
+        public int? RestaurantID { get; set; }
+        public int? Status { get; set; }
 }

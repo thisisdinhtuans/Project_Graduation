@@ -5,7 +5,9 @@ using Domain.Models.Dto.Blog;
 using Domain.Models.Dto.Category;
 using Domain.Models.Dto.Dish;
 using Domain.Models.Dto.Restaurant;
+using Domain.Models.Dto.Staff;
 using Domain.Models.Dto.Table;
+using Domain.Models.Dto.User;
 using Infrastructure.Entities;
 
 namespace Library.Mapper;
@@ -37,6 +39,12 @@ public class MappingProfiles: Profile
             CreateMap<CreateDishDto, Dish>();
             CreateMap<DishDto, Dish>();
             CreateMap<Dish, DishDto>();
+
+            CreateMap<AppUser, UserRequestDto>();
+            CreateMap<UserRequestDto, AppUser>();
+
+            CreateMap<AppUser, StaffCreateDto>();
+            CreateMap<StaffCreateDto, AppUser>();
 
     }
 }
