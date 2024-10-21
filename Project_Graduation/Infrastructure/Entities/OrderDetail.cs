@@ -3,7 +3,7 @@ namespace Infrastructure.Entities
     public class OrderDetail : BaseEntity
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }=string.Empty;
         public int DishId { get; set; }

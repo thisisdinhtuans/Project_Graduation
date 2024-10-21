@@ -98,10 +98,9 @@ public class BlogService: IBlogService
         return new ApiSuccessResult<Blog>(blog);
     }
 
-    public async Task<ApiResult<List<BlogDto>>> GetAllBlogsAsync()
+    public async Task<ApiResult<List<Blog>>> GetAllBlogsAsync()
     {
         var blogs = await _blogRepository.GetAllAsync(); // Lấy tất cả nhà hàng từ Repository
-        var blogsDto=_mapper.Map<List<BlogDto>>(blogs); // Chuyển đổi sang DTO
-        return new ApiSuccessResult<List<BlogDto>>(blogsDto);
+        return new ApiSuccessResult<List<Blog>>(blogs.ToList());
     }
 }

@@ -38,7 +38,7 @@ public class BlogsController : BaseApiController
         return Ok(blogs); // Tr? v? danh sách các nhà hàng
     }
 
-    [HttpGet("{id}", Name = "GetBlog")]
+    [HttpGet("get-by-id")]
     public async Task<ActionResult<Blog>> GetBlog(int id)
     {
         if (!ModelState.IsValid)

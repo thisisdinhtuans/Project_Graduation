@@ -37,7 +37,7 @@ public class DishController : BaseApiController
         return Ok(areas); // Tr? v? danh sách các nhà hàng
     }
 
-    [HttpGet("{id}", Name = "GetDish")]
+    [HttpGet("get-by-id")]
     public async Task<ActionResult<Dish>> GetDish(int id)
     {
         if (!ModelState.IsValid)

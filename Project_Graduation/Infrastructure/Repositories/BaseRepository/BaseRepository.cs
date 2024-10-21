@@ -36,6 +36,16 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntit
         await SaveAllAsync();   
     }
 
+    public async Task AddRange(List<T> entities)
+    {
+        foreach (var entity in entities)
+        {
+            _auditRepository.SetAuditForCreate(entity); // Set audit information for each entity in the range
+        }
+        await _dbSet.AddRangeAsync(entities); // Add range of entities
+        await _context.SaveChangesAsync(); // Save changes to the database
+    }
+
     public async Task Update(T entity)
     {
         _auditRepository.SetAuditForUpdate(entity);
@@ -63,5 +73,11 @@ public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseEntit
         {
             return await _dbSet.AnyAsync(expression);
         }
+
+    public async Task<List<T>> GetByCondition(Expression<Func<T, bool>> expression)
+    {
+        var a = await _dbSet.Where(expression).AsNoTracking().ToListAsync();
+        return a;
+    }
 
 }

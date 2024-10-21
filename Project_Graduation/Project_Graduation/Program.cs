@@ -9,12 +9,16 @@ using Infrastructure.Repositories.AuditRepository;
 using Infrastructure.Repositories.BlogRepository;
 using Infrastructure.Repositories.CategoryRepository;
 using Infrastructure.Repositories.DishRepository;
+using Infrastructure.Repositories.OrderDetailRepository;
+using Infrastructure.Repositories.OrderRepository;
 using Infrastructure.Repositories.TableRepository;
 using Infrastructure.Services;
 using Infrastructure.Services.AreaService;
 using Infrastructure.Services.BlogService;
 using Infrastructure.Services.CategoryService;
 using Infrastructure.Services.DishService;
+using Infrastructure.Services.OrderDetailService;
+using Infrastructure.Services.OrderService;
 using Infrastructure.Services.RestaurantService;
 using Infrastructure.Services.RoleService;
 using Infrastructure.Services.StaffService;
@@ -89,6 +93,13 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 
 builder.Services.AddScoped<IDishRepository, DishRepository>();
 builder.Services.AddScoped<IDishService, DishService>();
+
+builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
+builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
+
+
+builder.Services.AddScoped<IOrderRepository, OrderRepository>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
 

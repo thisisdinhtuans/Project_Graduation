@@ -24,6 +24,7 @@ public class TokenService
             //Tạo claims về thông tin người dùng
             var claims = new List<Claim>
 {
+                new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
                 new Claim(ClaimTypes.Email, user.Email),            // Email
                 new Claim(ClaimTypes.Name, user.FullName),          // Full name
                 new Claim(ClaimTypes.NameIdentifier, user.UserName) // User name
