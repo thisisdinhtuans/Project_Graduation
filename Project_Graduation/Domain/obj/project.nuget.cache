@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2AdENtqeskSQl2hsSHjyaHnkZSu+ZGL2lMPkCKH2WSziGlOAde6ElOGVkZTHfOJMZBwZZZ9rH6s6pNOfFZfXHQ==",
+  "dgSpecHash": "mXDKohkKjE4A4l4DfypspfwbF00XncVD1MyZQdGZ9cDojiM31Gs7W3ewQgccAMw47ZYxr/t5lRVQcRkSOydqMA==",
   "success": true,
   "projectFilePath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
   "expectedPackageFiles": [
@@ -25,8 +25,8 @@
     "C:\\Users\\AD\\.nuget\\packages\\system.collections.immutable\\6.0.0\\system.collections.immutable.6.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.diagnostics.diagnosticsource\\6.0.1\\system.diagnostics.diagnosticsource.6.0.1.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.runtime.compilerservices.unsafe\\6.0.0\\system.runtime.compilerservices.unsafe.6.0.0.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
   "logs": []

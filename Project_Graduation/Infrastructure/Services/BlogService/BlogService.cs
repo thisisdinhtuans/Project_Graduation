@@ -48,11 +48,11 @@ public class BlogService: IBlogService
 
     public async Task<ApiResult<bool>> UpdateBlogAsync(BlogDto blogDto)
     {
-        var addressExists = await _blogRepository.AnyAsync(x => x.Title == blogDto.Title);
-            if (addressExists)
-            {
-                return new ApiErrorResult<bool>("Blog với tiêu đề này đã tồn tại.");
-            }
+        // var addressExists = await _blogRepository.AnyAsync(x => x.Title == blogDto.Title);
+        // if (addressExists)
+        // {
+        //     return new ApiErrorResult<bool>("Blog với tiêu đề này đã tồn tại.");
+        // }
 
         var blog = await _blogRepository.GetByIdAsync(blogDto.BlogID);
         if (blog == null) throw new Exception("Blog not found");

@@ -103,6 +103,9 @@ builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddScoped<IRoleService, RoleService>();
 
+builder.Services.AddScoped<IStaffService, StaffService>();
+
+
 builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IStaffService, StaffService>();

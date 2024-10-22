@@ -26,7 +26,7 @@ public class DishController : BaseApiController
     //     return Ok(areas);
     // }
 
-    [HttpGet]
+    [HttpGet("get-full")]
     public async Task<IActionResult> GetAllDishs()
     {
         if (!ModelState.IsValid)
@@ -51,7 +51,7 @@ public class DishController : BaseApiController
 
 
     [Authorize(Roles = "Admin,Manager")]
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> CreateDish([FromBody] CreateDishDto areaDto)
     {
         if (!ModelState.IsValid)
@@ -79,8 +79,8 @@ public class DishController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteDish(int id)
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteDish([FromQuery]int id)
     {
         if (!ModelState.IsValid)
         {

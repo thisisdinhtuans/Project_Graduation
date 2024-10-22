@@ -27,7 +27,7 @@ public class RestaurantsController : BaseApiController
     //     return Ok(restaurants);
     // }
 
-    [HttpGet]
+    [HttpGet("get-full")]
     public async Task<IActionResult> GetAllRestaurants()
     {
         if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ public class RestaurantsController : BaseApiController
 
 
     [Authorize(Roles = "Admin,Manager")]
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto restaurantDto)
     {
         if (!ModelState.IsValid)
@@ -80,8 +80,8 @@ public class RestaurantsController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteRestaurant(int id)
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteRestaurant([FromQuery] int id)
     {
         if (!ModelState.IsValid)
         {

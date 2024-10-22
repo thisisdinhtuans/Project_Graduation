@@ -27,7 +27,7 @@ public class AreasController : BaseApiController
     //     return Ok(areas);
     // }
 
-    [HttpGet]
+    [HttpGet("get-full")]
     public async Task<IActionResult> GetAllAreas()
     {
         if (!ModelState.IsValid)
@@ -66,7 +66,7 @@ public class AreasController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("update")]
     public async Task<ActionResult> UpdateArea([FromBody] AreaDto areaDto)
     {
         if (!ModelState.IsValid)
@@ -80,8 +80,8 @@ public class AreasController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteArea(int id)
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteArea([FromQuery] int id)
     {
         if (!ModelState.IsValid)
         {

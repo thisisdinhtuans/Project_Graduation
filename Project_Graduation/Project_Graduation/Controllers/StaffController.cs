@@ -14,6 +14,14 @@ public class StaffController:BaseApiController
         {
             _staffService = staffService;
         }
+        [Authorize(Roles = "Admin,Manager")]
+        [HttpGet("get-full")]
+        public async Task<IActionResult> GetAllStaff()
+        {
+            var staff=await _staffService.GetAllStaff();
+            return Ok(staff);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] StaffCreateDto request)

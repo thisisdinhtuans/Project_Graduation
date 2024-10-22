@@ -26,7 +26,7 @@ namespace Project_Graduation.Controllers
         //     return Ok(tables);
         // }
 
-        [HttpGet]
+        [HttpGet("get-full")]
         public async Task<IActionResult> GetAllTables()
         {
             if (!ModelState.IsValid)

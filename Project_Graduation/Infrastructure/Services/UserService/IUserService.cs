@@ -1,4 +1,5 @@
 using System;
+using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Role;
 using Domain.Models.Dto.User;
 
@@ -10,4 +11,5 @@ public interface IUserService
     public Task<bool> Delete(Guid id);
     public Task<bool> RoleAssign(Guid id, RoleAssignRequestDto request);
     public Task<UserRequestDto> GetById(Guid id);
+    public Task<ApiResult<string>> BanUser(Guid userId);
 }

@@ -1,4 +1,6 @@
 using System;
+using Domain.Models.Common;
+using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Role;
 using Domain.Models.Dto.User;
 using Infrastructure.Data;
@@ -91,32 +93,115 @@ public class UserService : IUserService
             return true;
         }
 
-        public async Task<bool> Update(Guid id, UserUpdateRequestDto request)
+    public async Task<bool> Update(Guid id, UserUpdateRequestDto request)
+    {
+        // Tìm người dùng dựa trên Id
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user == null)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null)
-            {
-                return false; 
-            }           
-            var emailExists = _userManager.Users.Any(x => x.Id != id && x.Email == request.Email);
-            if (emailExists)
-            {
-                return false; 
-            }            
-            user.Dob = request.Dob;
-            user.FullName = request.FullName;
-            user.PhoneNumber = request.PhoneNumber;
-            user.Email = request.Email;
-            user.Gender = request.Gender;
-            var result = await _userManager.UpdateAsync(user);
-            if (result.Succeeded)
-            {
-                return true; 
-            }           
-            foreach (var error in result.Errors)
+            return false; 
+        }
+
+        // Kiểm tra xem email có bị trùng lặp với người dùng khác không
+        var emailExists = _userManager.Users.Any(x => x.Id != id && x.Email == request.Email);
+        if (emailExists)
+        {
+            return false; 
+        }
+
+        // Cập nhật các thông tin khác của người dùng
+        user.Dob = request.Dob;
+        user.FullName = request.FullName;
+        user.PhoneNumber = request.PhoneNumber;
+        user.Email = request.Email;
+        user.Gender = request.Gender;
+        user.CCCD = request.CCCD;
+        user.RestaurantID = request.RestaurantId;
+
+        // Cập nhật thông tin người dùng
+        var updateResult = await _userManager.UpdateAsync(user);
+        if (!updateResult.Succeeded)
+        {
+            foreach (var error in updateResult.Errors)
             {
                 Console.WriteLine($"Error: {error.Description}");
             }
             return false;
         }
+
+        // Cập nhật các vai trò (Roles)
+        var currentRoles = await _userManager.GetRolesAsync(user);
+        
+        // Xóa tất cả các vai trò hiện tại của người dùng
+        var removeResult = await _userManager.RemoveFromRolesAsync(user, currentRoles);
+        if (!removeResult.Succeeded)
+        {
+            foreach (var error in removeResult.Errors)
+            {
+                Console.WriteLine($"Error removing roles: {error.Description}");
+            }
+            return false;
+        }
+
+        // Thêm các vai trò mới từ request.Roles
+        if (request.Role != null && request.Role.Any())
+        {
+            var addRolesResult = await _userManager.AddToRoleAsync(user, request.Role);
+            if (!addRolesResult.Succeeded)
+            {
+                foreach (var error in addRolesResult.Errors)
+                {
+                    Console.WriteLine($"Error adding roles: {error.Description}");
+                }
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public async Task<ApiResult<string>> BanUser(Guid userId)
+    {
+        var user = await _userManager.FindByIdAsync(userId.ToString());
+        if (user == null)
+        {
+            return new ApiErrorResult<string>("Người dùng không tồn tại.");
+        }
+
+        if (user.Status == 0)
+        {
+            user.Status = 1;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<string>("Người dùng đã bị cấm thành công.");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine($"Error: {error.Description}");
+                }
+                return new ApiErrorResult<string>("Không thể cập nhật trạng thái người dùng.");
+            }
+        }
+        else
+        {
+            user.Status = 0;
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return new ApiSuccessResult<string>("Người dùng đã mở cấm thành công.");
+            }
+            else
+            {
+                foreach (var error in result.Errors)
+                {
+                    Console.WriteLine($"Error: {error.Description}");
+                }
+                return new ApiErrorResult<string>("Không thể cập nhật trạng thái người dùng.");
+            }
+        }
+
+    }
 }

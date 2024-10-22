@@ -27,7 +27,7 @@ public class BlogsController : BaseApiController
     //     return Ok(blogs);
     // }
 
-    [HttpGet]
+    [HttpGet("get-full")]
     public async Task<IActionResult> GetAllBlogs()
     {
         if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ public class BlogsController : BaseApiController
 
 
     [Authorize(Roles = "Admin,Manager")]
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> CreateBlog([FromBody] CreateBlogDto blogDto)
     {
         if (!ModelState.IsValid)
@@ -66,7 +66,7 @@ public class BlogsController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("update")]
     public async Task<ActionResult> UpdateBlog([FromBody] BlogDto blogDto)
     {
         if (!ModelState.IsValid)
@@ -80,8 +80,8 @@ public class BlogsController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteBlog(int id)
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteBlog([FromQuery]int id)
     {
         if (!ModelState.IsValid)
         {

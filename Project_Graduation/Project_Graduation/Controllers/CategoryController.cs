@@ -27,7 +27,7 @@ public class CategoriesController : BaseApiController
     //     return Ok(categorys);
     // }
 
-    [HttpGet]
+    [HttpGet("get-full")]
     public async Task<IActionResult> GetAllCategories()
     {
         if (!ModelState.IsValid)
@@ -52,7 +52,7 @@ public class CategoriesController : BaseApiController
 
 
     [Authorize(Roles = "Admin,Manager")]
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto categoryDto)
     {
         if (!ModelState.IsValid)
@@ -66,7 +66,7 @@ public class CategoriesController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("update")]
     public async Task<ActionResult> UpdateCategory([FromBody] CategoryDto categoryDto)
     {
         if (!ModelState.IsValid)
@@ -80,8 +80,8 @@ public class CategoriesController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpDelete("{id}")]
-    public async Task<ActionResult> DeleteCategory(int id)
+    [HttpDelete("delete")]
+    public async Task<ActionResult> DeleteCategory([FromQuery] int id)
     {
         if (!ModelState.IsValid)
         {
