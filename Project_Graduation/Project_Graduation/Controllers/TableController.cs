@@ -51,7 +51,7 @@ namespace Project_Graduation.Controllers
 
 
         [Authorize(Roles = "Admin,Manager")]
-        [HttpPost]
+        [HttpPost("add")]
         public async Task<IActionResult> CreateTable([FromBody] CreateTableDto tableDto)
         {
             if (!ModelState.IsValid)

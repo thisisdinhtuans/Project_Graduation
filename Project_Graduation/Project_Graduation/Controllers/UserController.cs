@@ -84,4 +84,12 @@ public class UserController:BaseApiController {
             return BadRequest(result);
         }
     }
+
+    [Authorize(Roles = "Admin,Manager")]
+    [HttpGet("get-full-customer")]
+    public async Task<IActionResult> GetAllCustomer()
+    {
+        var customer=await _userService.GetAllCustomer();
+        return Ok(customer);
+    }
 }

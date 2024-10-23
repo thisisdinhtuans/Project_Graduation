@@ -22,6 +22,7 @@ using Infrastructure.Services.OrderService;
 using Infrastructure.Services.RestaurantService;
 using Infrastructure.Services.RoleService;
 using Infrastructure.Services.StaffService;
+using Infrastructure.Services.StatisticService;
 using Infrastructure.Services.TableService;
 using Infrastructure.Services.UserService;
 using Library.Extensions.Middleware;
@@ -110,6 +111,7 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 builder.Services.AddScoped<IStaffService, StaffService>();
 
+builder.Services.AddScoped<IStatisticService, StatisticService>();
 
 
 builder.Services.AddCors();

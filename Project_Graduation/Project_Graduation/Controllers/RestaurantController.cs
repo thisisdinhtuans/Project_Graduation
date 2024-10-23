@@ -66,7 +66,7 @@ public class RestaurantsController : BaseApiController
     }
 
     [Authorize(Roles = "Admin")]
-    [HttpPut]
+    [HttpPut("update")]
     public async Task<ActionResult> UpdateRestaurant([FromBody] RestaurantDto restaurantDto)
     {
         if (!ModelState.IsValid)

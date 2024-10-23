@@ -52,7 +52,7 @@ public class AreasController : BaseApiController
 
 
     [Authorize(Roles = "Admin,Manager")]
-    [HttpPost]
+    [HttpPost("add")]
     public async Task<IActionResult> CreateArea([FromBody] CreateAreaDto areaDto)
     {
         if (!ModelState.IsValid)
