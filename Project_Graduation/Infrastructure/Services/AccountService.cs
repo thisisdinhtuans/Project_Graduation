@@ -29,6 +29,7 @@ public class AccountService: IAccountService
             // Return user details along with JWT token
             return new UserDto
             {
+                Id=user.Id.ToString(),
                 UserName = user.UserName,        // Username
                 FullName = user.FullName,        // Full Name
                 Email = user.Email,              // Email
@@ -49,7 +50,8 @@ public class AccountService: IAccountService
         PhoneNumber = registerDto.PhoneNumber,
         FullName = registerDto.FullName,
         Dob = registerDto.Dob,
-        Gender = registerDto.Gender
+        Gender = registerDto.Gender,
+        Status=0
     };
 
     // Thực hiện tạo user với password

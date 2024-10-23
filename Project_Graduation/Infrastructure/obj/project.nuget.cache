@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "SMPIxL5kNUvNvz3399ZenbPxEla9jrixKn+0Tr82CcUbbs8iy9aBNuxD19ygmFolyj81ygQtnj4Hlzb9sMGZ6g==",
+  "dgSpecHash": "3xmfsJu7LaALhF5ZaUQMWiPIunNUvFWQrOmaKe9p/cB9eK8VwrqbqfnSAHp6/GxmKdniIFXgRO40r2bcNuRsbw==",
   "success": true,
   "projectFilePath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
@@ -69,20 +69,9 @@
     "C:\\Users\\AD\\.nuget\\packages\\system.text.encodings.web\\6.0.0\\system.text.encodings.web.6.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.text.json\\6.0.0\\system.text.json.6.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
-  "logs": [
-    {
-      "code": "NU1903",
-      "level": "Warning",
-      "warningLevel": 1,
-      "message": "Package 'Microsoft.AspNetCore.Http' 2.1.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-hxrm-9w7p-39cc",
-      "libraryId": "Microsoft.AspNetCore.Http",
-      "targetGraphs": [
-        "net6.0"
-      ]
-    }
-  ]
+  "logs": []
 }

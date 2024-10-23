@@ -6,6 +6,7 @@ using Domain.Models.Dto.User;
 using Infrastructure.Data;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Services.UserService;
 
@@ -46,10 +47,10 @@ public class UserService : IUserService
             //var operations = await _operationRepository.GetAll();
             var uservm = new UserRequestDto()
             {
+                Id=user.Id,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
                 FullName = user.FullName,
-                Id = id,
                 UserName = user.UserName,
                 Roles = roles,
                 Dob = user.Dob,
@@ -203,5 +204,46 @@ public class UserService : IUserService
             }
         }
 
+    }
+
+    public async Task<ApiResult<List<UserRequestDto>>> GetAllCustomer()
+    {
+        // Lấy tất cả người dùng từ UserManager
+        var users = await _userManager.Users.ToListAsync();
+
+        // Tạo danh sách để lưu trữ kết quả trả về
+        var customerUsers = new List<UserRequestDto>();
+
+        // Lặp qua tất cả người dùng và lấy thông tin vai trò
+        foreach (var user in users)
+        {
+            // Lấy các vai trò của người dùng
+            var roles = await _userManager.GetRolesAsync(user);
+
+            // Chỉ thêm những người dùng có role là Receptionist, Waiter, hoặc Manager
+            if (roles.Any(role => role == "Customer"))
+            {
+                // Tạo đối tượng UserRequestDto bao gồm thông tin chi tiết và vai trò
+                var customerUser = new UserRequestDto
+                {
+                    Id = user.Id,
+                    FullName = user.FullName,
+                    UserName = user.UserName,
+                    Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    Dob = user.Dob,
+                    Gender = user.Gender,
+                    CCCD = user.CCCD,
+                    RestaurantID = user.RestaurantID,
+                    Status=user.Status,
+                    Roles = roles // Bao gồm thông tin về các vai trò
+                };
+
+                customerUsers.Add(customerUser);
+            }
+        }
+
+        // Trả về danh sách nhân viên bao gồm các vai trò phù hợp
+        return new ApiSuccessResult<List<UserRequestDto>>(customerUsers);
     }
 }

@@ -12,4 +12,5 @@ public interface IUserService
     public Task<bool> RoleAssign(Guid id, RoleAssignRequestDto request);
     public Task<UserRequestDto> GetById(Guid id);
     public Task<ApiResult<string>> BanUser(Guid userId);
+    Task<ApiResult<List<UserRequestDto>>> GetAllCustomer();
 }
