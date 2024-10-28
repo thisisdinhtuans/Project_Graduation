@@ -16,3 +16,21 @@ D:\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.dll
 D:\DoAn\Project_Graduation\Library\obj\Debug\net6.0\refint\Library.dll
 D:\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.pdb
 D:\DoAn\Project_Graduation\Library\obj\Debug\net6.0\ref\Library.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Library.deps.json
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Library.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Library.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Domain.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Infrastructure.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Domain.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\bin\Debug\net6.0\Infrastructure.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.csproj.AssemblyReference.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.AssemblyInfoInputs.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.AssemblyInfo.cs
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.csproj.CoreCompileInputs.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.sourcelink.json
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.csproj.CopyComplete
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\refint\Library.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\Library.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Library\obj\Debug\net6.0\ref\Library.dll

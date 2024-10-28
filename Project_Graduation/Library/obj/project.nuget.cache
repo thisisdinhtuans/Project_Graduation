@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "AjPxQtUEqkGKa1d37/WOiP5caYG6CnimRxUovP21/0TCVVf9sbgYclyNdpIsIalABIIYndbbpwHDLScTVI4EDQ==",
+  "dgSpecHash": "Lp4WC1Zo3QeUjX6LhzgC/EkNVJhWeF8FnITCnjAbfqdXR2ITfY+CxHKc9t0S91Mfqlsgbge4W8Ma2HzVRqLrgw==",
   "success": true,
-  "projectFilePath": "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj",
+  "projectFilePath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\AD\\.nuget\\packages\\automapper\\11.0.0\\automapper.11.0.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\11.0.0\\automapper.extensions.microsoft.dependencyinjection.11.0.0.nupkg.sha512",
@@ -118,8 +118,8 @@
     "C:\\Users\\AD\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
   "logs": []

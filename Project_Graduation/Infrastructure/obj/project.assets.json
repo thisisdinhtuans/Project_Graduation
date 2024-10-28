@@ -2857,11 +2857,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-      "outputPath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\obj\\",
+      "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2878,8 +2878,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+            "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
             }
           }
         }
@@ -2888,9 +2888,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "default"
       }
     },
     "frameworks": {
@@ -2967,5 +2964,17 @@
         "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100\\RuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNetCore.Http' 2.1.1 has a known high severity vulnerability, https://github.com/advisories/GHSA-hxrm-9w7p-39cc",
+      "libraryId": "Microsoft.AspNetCore.Http",
+      "targetGraphs": [
+        "net6.0"
+      ]
+    }
+  ]
 }

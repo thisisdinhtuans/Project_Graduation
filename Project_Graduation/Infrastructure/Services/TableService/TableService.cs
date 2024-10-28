@@ -11,6 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Repositories.AreaRepository;
+using Domain.Enums;
 
 namespace Infrastructure.Services.TableService
 {
@@ -116,6 +117,25 @@ namespace Infrastructure.Services.TableService
             var tables = await _tableRepository.GetAllAsync(); // Lấy tất cả nhà hàng từ Repository
             var tablesDto = _mapper.Map<List<TableDto>>(tables); // Chuyển đổi sang DTO
             return new ApiSuccessResult<List<TableDto>>(tablesDto);
+        }
+
+        public async Task<ApiResult<bool>> UpdateStatusTable(int id, EnumTable status)
+        {
+            try
+            {
+                var table = await _tableRepository.GetByIdAsync(id);
+                if (table == null)
+                {
+                    return new ApiErrorResult<bool>("Không tìm thấy bàn");
+                }
+                table.Status = (int)status;
+                await _tableRepository.Update(table);
+                return new ApiSuccessResult<bool>(true);
+            }
+            catch (Exception ex)
+            {
+                return new ApiErrorResult<bool>($"Lỗi khi cập nhật trạng thái: {ex.Message}");
+            }
         }
     }
 

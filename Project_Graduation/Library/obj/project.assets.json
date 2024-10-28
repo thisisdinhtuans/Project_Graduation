@@ -6053,11 +6053,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj",
+      "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj",
       "projectName": "Library",
-      "projectPath": "D:\\DoAn\\Project_Graduation\\Library\\Library.csproj",
+      "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj",
       "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-      "outputPath": "D:\\DoAn\\Project_Graduation\\Library\\obj\\",
+      "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -6074,11 +6074,11 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+            "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
             },
-            "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
-              "projectPath": "D:\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
+            "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
+              "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
             }
           }
         }
@@ -6087,9 +6087,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "default"
       }
     },
     "frameworks": {

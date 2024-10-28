@@ -11,3 +11,16 @@ D:\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\refint\Domain.dll
 D:\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.pdb
 D:\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\ref\Domain.dll
 D:\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\bin\Debug\net6.0\Domain.deps.json
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\bin\Debug\net6.0\Domain.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\bin\Debug\net6.0\Domain.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.csproj.AssemblyReference.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.GeneratedMSBuildEditorConfig.editorconfig
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.AssemblyInfoInputs.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.AssemblyInfo.cs
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.csproj.CoreCompileInputs.cache
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.sourcelink.json
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\refint\Domain.dll
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\Domain.pdb
+D:\Mon hoc tren lop\Do An\DoAn\Project_Graduation\Domain\obj\Debug\net6.0\ref\Domain.dll

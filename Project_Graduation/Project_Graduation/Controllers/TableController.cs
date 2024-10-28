@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Domain.Enums;
 using Domain.Models.Dto.Table;
 using Infrastructure.Entities;
 using Infrastructure.Services.TableService;
@@ -90,6 +91,18 @@ namespace Project_Graduation.Controllers
             var result = await _tableService.DeleteTableAsync(id);
             //if (!result.IsSuccessed) return BadRequest(new ProblemDetails { Title = "Vấn đề khi xóa nhà hàng" });
             //return NoContent();
+            return Ok(result);
+        }
+
+        [Authorize(Roles = "Admin,Receptionist")]
+        [HttpPut("UpdateStatus/{tableId}")]
+        public async Task<IActionResult> UpdateTableStatus(int tableId, [FromBody] EnumTable newStatus)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+            var result = await _tableService.UpdateStatusTable(tableId, newStatus);
             return Ok(result);
         }
     }

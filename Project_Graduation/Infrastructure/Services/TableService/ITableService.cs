@@ -1,4 +1,5 @@
-﻿using Domain.Models.Common.ApiResult;
+﻿using Domain.Enums;
+using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Table;
 using Infrastructure.Entities;
 using System;
@@ -16,5 +17,6 @@ namespace Infrastructure.Services.TableService
         Task<ApiResult<bool>> CreateTableAsync(CreateTableDto restaurantDto);
         Task<ApiResult<bool>> UpdateTableAsync(TableDto restaurantDto);
         Task<ApiResult<bool>> DeleteTableAsync(int id);
+        public Task<ApiResult<bool>> UpdateStatusTable(int id, EnumTable status);
     }
 }

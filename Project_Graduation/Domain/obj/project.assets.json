@@ -824,11 +824,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
+      "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-      "outputPath": "D:\\DoAn\\Project_Graduation\\Domain\\obj\\",
+      "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -851,9 +851,6 @@
         "warnAsError": [
           "NU1605"
         ]
-      },
-      "restoreAuditProperties": {
-        "enableAudit": "default"
       }
     },
     "frameworks": {
