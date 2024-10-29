@@ -62,7 +62,7 @@ public class UserController:BaseApiController {
         }
         return Ok(result);
     }
-    [Authorize(Roles = "Admin,Manager,Owner, Receptionist,Customer")]
+    [Authorize(Roles = "Admin,Manager,Owner,Waiter, Receptionist,Customer")]
     [HttpGet("get-by-id")]
     public async Task<IActionResult> GetById([FromQuery]Guid Id)
     {

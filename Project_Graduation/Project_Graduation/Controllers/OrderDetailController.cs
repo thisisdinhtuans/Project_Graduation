@@ -43,7 +43,7 @@ public class OrderDetailController : BaseApiController
         }
 
         [Authorize(Roles = "Customer,Waiter")]
-        [HttpPost("update-order-details")]
+        [HttpPut("update-order-details")]
         public async Task<IActionResult> UpdateOrderDetails([FromBody] OrderDetailUpdateRequest request)
         {
             try

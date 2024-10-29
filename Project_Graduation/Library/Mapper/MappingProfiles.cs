@@ -55,5 +55,9 @@ public class MappingProfiles: Profile
             CreateMap<OrderDto, Order>();
             CreateMap<Order,OrderDto>();
 
+            CreateMap<OrderDetailUpdateRequest ,OrderDetail>();
+            CreateMap<OrderDetail ,OrderDetailUpdateRequest>();
+
+
     }
 }
