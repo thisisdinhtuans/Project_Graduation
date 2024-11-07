@@ -2857,11 +2857,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+      "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
       "projectName": "Infrastructure",
-      "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+      "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
       "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-      "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\obj\\",
+      "outputPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -2878,8 +2878,8 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "projectReferences": {
-            "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-              "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+            "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj"
             }
           }
         }
