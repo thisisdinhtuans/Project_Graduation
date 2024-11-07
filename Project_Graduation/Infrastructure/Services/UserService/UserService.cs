@@ -1,4 +1,8 @@
 using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Security.Cryptography;
+using System.Text;
 using Domain.Models.Common;
 using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Login;
@@ -7,7 +11,10 @@ using Domain.Models.Dto.User;
 using Infrastructure.Data;
 using Infrastructure.Entities;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Infrastructure.Services.UserService;
 
@@ -15,9 +22,11 @@ public class UserService : IUserService
 {
         private readonly Project_Graduation_Context _dbcontext;
         private readonly UserManager<AppUser> _userManager;
+        private readonly IConfiguration _configuration;
 
-        public UserService(Project_Graduation_Context dbcontext, UserManager<AppUser> userManager)
+        public UserService(IConfiguration configuration, Project_Graduation_Context dbcontext, UserManager<AppUser> userManager)
         {
+            _configuration = configuration;
             _dbcontext = dbcontext;
             _userManager = userManager;
         }
@@ -263,5 +272,151 @@ public class UserService : IUserService
             return new ApiErrorResult<bool>($"Đổi mật khẩu thất bại: {errors}");
         }
         return new ApiSuccessResult<bool>(true);
+    }
+
+    public async Task<ApiResult<EmailChecked>> SendMailCheckUser(string email, string? uri = null)
+        {
+            var user = _userManager.Users.FirstOrDefault(x => x.Email == email);
+            if (user == null)
+            {
+                return new ApiErrorResult<EmailChecked>("Không có User");
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            user.RecoveryToken = token; 
+            await _userManager.UpdateAsync(user); 
+
+            var param = new Dictionary<string, string?>
+    {
+        { "token", Uri.EscapeDataString(token) }, // Mã hóa token
+        { "email", Uri.EscapeDataString(email) },
+        { "userId", Uri.EscapeDataString(user.Id.ToString()) }
+    };
+
+            var callback = !string.IsNullOrEmpty(uri)
+                ? QueryHelpers.AddQueryString(uri, param)
+                : "http://localhost:3000/resetPassword" + QueryHelpers.AddQueryString("", param);
+
+            return new ApiSuccessResult<EmailChecked>(new EmailChecked
+            {
+                ClientUrl = callback,
+                Email = email,
+                TokenRenew = token,
+                UserId = user.Id.ToString()
+            });
+        }
+
+    public async Task<ApiResult<bool>> CheckUserExists(string userName, string email)
+        {
+            var userByUserName = await _userManager.FindByNameAsync(userName);
+            if (userByUserName != null)
+            {
+                return new ApiErrorResult<bool>("Username already exists.");
+            }
+
+            var userByEmail = await _userManager.FindByEmailAsync(email);
+            if (userByEmail != null)
+            {
+                return new ApiErrorResult<bool>("Email already exists.");
+            }
+
+            return new ApiSuccessResult<bool>(true);
+        }
+
+    public async Task<ApiResult<bool>> RenewPassword(RenewPassword obj)
+    {
+        Console.WriteLine($"Received Token: {obj.TokenRenew}");
+        var user = _userManager.Users.FirstOrDefault(u => u.RecoveryToken == obj.TokenRenew);
+
+        if (user == null)
+        {
+            return new ApiErrorResult<bool>("Token không hợp lệ.");
+        }
+
+        // Đặt lại mật khẩu
+        var result = await _userManager.ResetPasswordAsync(user, obj.TokenRenew, obj.PassWord);
+
+        if (!result.Succeeded)
+        {
+            var errorMessages = result.Errors.Select(e => e.Description).ToList();
+            return new ApiErrorResult<bool>(string.Join(", ", errorMessages));
+        }
+
+        // Xóa token sau khi đặt lại mật khẩu thành công (nếu cần)
+        user.RecoveryToken = null;
+        await _userManager.UpdateAsync(user);
+
+        return new ApiSuccessResult<bool>(true);
+    }
+
+    public async Task<ApiResult<Tokens>> RenewToken(TokenRequestDto request)
+    {
+        var jwtTokenSecurityHandler = new JwtSecurityTokenHandler();
+        var decodeToken = jwtTokenSecurityHandler.ReadJwtToken(request.Access_Token);
+        
+        var userName = decodeToken.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.NameIdentifier)?.Value;
+        if (userName == null)
+        {
+            return new ApiErrorResult<Tokens>("Invalid token");
+        }
+
+        var user = await _userManager.FindByNameAsync(userName);
+        if (user == null)
+        {
+            return new ApiErrorResult<Tokens>("User not found");
+        }
+
+        // Lấy các roles của người dùng từ UserManager
+        var roles = await _userManager.GetRolesAsync(user);
+        
+        // Tạo các claims từ thông tin người dùng và các roles
+        var claims = new List<Claim>
+        {
+            new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+            new Claim(ClaimTypes.Email, user.Email),
+            new Claim(ClaimTypes.Name, user.FullName),
+            new Claim(ClaimTypes.NameIdentifier, user.UserName)
+        };
+
+        foreach (var role in roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role));
+        }
+
+        // Tạo khóa bí mật và cấu hình mã ký
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Jwt:Key"]));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+        // Tạo lại JWT với các claims
+        var token = new JwtSecurityToken(
+            issuer: _configuration["Jwt:Issuer"],
+            audience: _configuration["Jwt:Issuer"],
+            claims: claims,
+            expires: DateTime.Now.AddHours(3),
+            signingCredentials: creds
+        );
+
+        string refreshToken = GenerateRefreshToken();
+
+        // Cập nhật refresh token vào user
+        user.RefreshToken = refreshToken;
+        await _userManager.UpdateAsync(user);
+
+        var getToken = new Tokens()
+        {
+            Access_Token = new JwtSecurityTokenHandler().WriteToken(token),
+            Refresh_Token = refreshToken
+        };
+
+        return new ApiSuccessResult<Tokens>(getToken);
+    }
+    private string GenerateRefreshToken()
+    {
+        var random = new Byte[32];
+        using (var rng = RandomNumberGenerator.Create())
+        {
+            rng.GetBytes(random);
+            return Convert.ToBase64String(random);
+        };
     }
 }

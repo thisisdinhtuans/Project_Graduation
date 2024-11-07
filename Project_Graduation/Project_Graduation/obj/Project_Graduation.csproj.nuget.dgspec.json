@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj": {}
+    "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj": {}
   },
   "projects": {
-    "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
+    "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
+        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj",
         "projectName": "Domain",
-        "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj",
+        "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj",
         "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-        "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\obj\\",
+        "outputPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -79,14 +79,14 @@
         }
       }
     },
-    "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
+    "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
         "projectName": "Infrastructure",
-        "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
+        "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj",
         "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-        "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\obj\\",
+        "outputPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -103,8 +103,8 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj"
               }
             }
           }
@@ -190,14 +190,14 @@
         }
       }
     },
-    "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj": {
+    "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj",
+        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj",
         "projectName": "Library",
-        "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj",
+        "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj",
         "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-        "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\obj\\",
+        "outputPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -214,11 +214,11 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj"
               },
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
               }
             }
           }
@@ -284,14 +284,14 @@
         }
       }
     },
-    "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj": {
+    "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj",
+        "projectUniqueName": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj",
         "projectName": "Project_Graduation",
-        "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj",
+        "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Project_Graduation\\Project_Graduation.csproj",
         "packagesPath": "C:\\Users\\AD\\.nuget\\packages\\",
-        "outputPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Project_Graduation\\obj\\",
+        "outputPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Project_Graduation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\AD\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -308,14 +308,14 @@
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Domain\\Domain.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Domain\\Domain.csproj"
               },
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Infrastructure\\Infrastructure.csproj"
               },
-              "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj": {
-                "projectPath": "D:\\Mon hoc tren lop\\Do An\\DoAn\\Project_Graduation\\Library\\Library.csproj"
+              "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj": {
+                "projectPath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj"
               }
             }
           }
@@ -347,6 +347,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.31, )"
+            },
+            "NETCore.MailKit": {
+              "target": "Package",
+              "version": "[2.1.0, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",

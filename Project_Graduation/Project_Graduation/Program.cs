@@ -32,10 +32,12 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Project_Graduation.Lip;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+// builder.Services.AddDistributedMemoryCache();
+// builder.Services.AddSession();
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
@@ -121,7 +123,8 @@ builder.Services.AddIdentityCore<AppUser>(opt =>
     opt.User.RequireUniqueEmail = true;
 })
     .AddRoles<AppRole>()
-    .AddEntityFrameworkStores<Project_Graduation_Context>();
+    .AddEntityFrameworkStores<Project_Graduation_Context>()
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt=>
@@ -139,6 +142,11 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 // builder.Services.AddReponsitories();
 builder.Services.AddScoped<TokenService>();
 builder.Services.AddHttpContextAccessor();
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 app.UseMiddleware<ExceptionMiddleware>();
 
