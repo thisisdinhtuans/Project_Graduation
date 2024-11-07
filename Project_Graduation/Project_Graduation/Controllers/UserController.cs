@@ -1,9 +1,12 @@
 using System;
+using System.Security.Claims;
+using Domain.Models.Dto.Login;
 using Domain.Models.Dto.Role;
 using Domain.Models.Dto.User;
 using Infrastructure.Services.UserService;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Project_Graduation.Controllers;
 
@@ -91,5 +94,29 @@ public class UserController:BaseApiController {
     {
         var customer=await _userService.GetAllCustomer();
         return Ok(customer);
+    }
+
+    [Authorize]
+    [HttpPost("change-password")]
+    public async Task<IActionResult> ChangePassword([FromBody] ChangePasswordDto request)
+    {
+        if(!ModelState.IsValid)
+        {
+            return BadRequest("Dữ liệu không hợp lệ.");
+        }
+
+        var email=User.FindFirstValue(ClaimTypes.Email);
+        if(string.IsNullOrEmpty(email))
+        {
+            return Unauthorized("Không xác định được người dùng");
+        }
+
+        var result=await _userService.ChangePassword(email,request);
+
+        if(!result.IsSuccessed)
+        {
+            return BadRequest(result.Message);
+        }
+        return Ok("Đổi mật khẩu thành công");
     }
 }

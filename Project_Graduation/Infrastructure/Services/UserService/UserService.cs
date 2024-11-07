@@ -1,6 +1,7 @@
 using System;
 using Domain.Models.Common;
 using Domain.Models.Common.ApiResult;
+using Domain.Models.Dto.Login;
 using Domain.Models.Dto.Role;
 using Domain.Models.Dto.User;
 using Infrastructure.Data;
@@ -245,5 +246,22 @@ public class UserService : IUserService
 
         // Trả về danh sách nhân viên bao gồm các vai trò phù hợp
         return new ApiSuccessResult<List<UserRequestDto>>(customerUsers);
+    }
+
+    public async Task<ApiResult<bool>> ChangePassword(string email, ChangePasswordDto request)
+    {
+        var user=await _userManager.FindByEmailAsync(email);
+        if(user==null) 
+        {
+            return new ApiErrorResult<bool>("Người dùng không tồn tại");
+        }
+
+        var result = await _userManager.ChangePasswordAsync(user, request.CurrentPassword, request.NewPassword);
+        if(!result.Succeeded)
+        {
+            var errors=string.Join(", ", result.Errors.Select(e => e.Description));
+            return new ApiErrorResult<bool>($"Đổi mật khẩu thất bại: {errors}");
+        }
+        return new ApiSuccessResult<bool>(true);
     }
 }
