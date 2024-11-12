@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<sitemanifest>
+  <IisApp path="D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\" />
+  <dbfullsql path="D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\EFSQLScripts\Infrastructure.Data.Project_Graduation_Context.sql" />
+</sitemanifest>

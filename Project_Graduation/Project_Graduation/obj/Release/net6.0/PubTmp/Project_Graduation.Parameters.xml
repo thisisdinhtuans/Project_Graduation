@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<parameters>
+  <parameter name="IIS Web Application Name" description="" value="gocque" tags="IisApp">
+    <parameterEntry kind="ProviderPath" scope="IisApp" match="^D:\\Mon\ hoc\ tren\ lop\\Do\ An\\BE\\Project_Graduation\\Project_Graduation\\obj\\Release\\net6\.0\\PubTmp\\Out\\$" />
+  </parameter>
+  <parameter name="Infrastructure.Data.Project_Graduation_Context" description="" value="Data Source=project-graduationdbserver.database.windows.net,1433;Initial Catalog=Project_Graduation_db;User ID=project_graduation;Password=Tuan123@6" tags="dbfullsql">
+    <parameterEntry kind="ProviderPath" scope="dbfullsql" match="^D:\\Mon\ hoc\ tren\ lop\\Do\ An\\BE\\Project_Graduation\\Project_Graduation\\obj\\Release\\net6\.0\\PubTmp\\EFSQLScripts\\Infrastructure\.Data\.Project_Graduation_Context\.sql$" />
+  </parameter>
+</parameters>
