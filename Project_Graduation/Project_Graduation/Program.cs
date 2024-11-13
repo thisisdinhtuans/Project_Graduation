@@ -1,4 +1,4 @@
-using System.Text;
+﻿using System.Text;
 using System.Text.Json.Serialization;
 using API.Data;
 using Domain.Features;
@@ -32,10 +32,21 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using Project_Graduation.Controllers;
+using Project_SEP490_G64_Summer24_BackEnd.Lip;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.AddDistributedMemoryCache();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;  // ??m b?o cookie ch? g?i qua HTTPS
+    options.Cookie.SameSite = SameSiteMode.None;
+});
 builder.Services.AddControllers();
 builder.Services.AddControllers().AddJsonOptions(x => x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddAutoMapper(typeof(MappingProfiles).Assembly);
@@ -138,27 +149,44 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 );
 // builder.Services.AddReponsitories();
 builder.Services.AddScoped<TokenService>();
-builder.Services.AddHttpContextAccessor();
-var app = builder.Build();
-app.UseMiddleware<ExceptionMiddleware>();
+builder.Services.AddScoped<PayLib>();
+builder.Services.AddScoped<Util>();
+builder.Services.AddScoped<PayCompare>();
+builder.Services.AddScoped<VnPayController>();
 
-// Configure the HTTP request pipeline.
-//if (app.Environment.IsDevelopment())
-//{
+
+builder.Services.AddHttpContextAccessor();
+//builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+builder.Services.AddCors(c =>
+{
+    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().
+     AllowAnyHeader());
+});
+//builder.Services.AddControllersWithViews()
+//                .AddNewtonsoftJson(options =>
+//                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+//            );
+var app = builder.Build();
+if (app.Environment.IsDevelopment())
+{
     app.UseSwagger();
     app.UseSwaggerUI();
-//}
-
-app.UseCors(opt=>
-{
-    opt.AllowAnyHeader().AllowAnyMethod().AllowCredentials().WithOrigins("http://localhost:3000");
-});
-
-
+}
 app.UseHttpsRedirection();
+app.UseMiddleware<ExceptionMiddleware>();
+app.UseHttpsRedirection();
+app.UseRouting();
+
+
+// Configure the HTTP request pipeline
+
+app.UseCors("AllowOrigin");
+
+
 app.UseAuthentication();
 app.UseAuthorization();
-app.MapControllers();
+app.UseSession();
+
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<Project_Graduation_Context>();
 var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
@@ -173,4 +201,5 @@ catch (Exception ex)
 {
     logger.LogError(ex, "A problem occurred during migration");
 }
+app.MapControllers();
 app.Run();

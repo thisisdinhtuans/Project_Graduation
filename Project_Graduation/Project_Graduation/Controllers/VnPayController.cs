@@ -2,20 +2,23 @@ using System;
 using Domain.Models.Common;
 using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Order;
+using Infrastructure.Entities;
 using Infrastructure.Services.OrderService;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using Project_Graduation.Lip;
+using Project_SEP490_G64_Summer24_BackEnd.Lip;
 
 namespace Project_Graduation.Controllers;
 
 public class VnPayController : BaseApiController
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IConfiguration _configuration;
     private readonly IOrderService _orderService;
 
-    public VnPayController(IConfiguration configuration, IOrderService orderService)
+    public VnPayController(IConfiguration configuration, IOrderService orderService, IHttpContextAccessor httpContextAccessor)
     {
+        _httpContextAccessor = httpContextAccessor;
         _configuration = configuration;
         _orderService = orderService;
 
@@ -42,9 +45,11 @@ public class VnPayController : BaseApiController
         return ipAddress;
     }
     [HttpPost]
-    public IActionResult Payment([FromBody] OrderDto order)
+    public async Task<IActionResult> Payment([FromBody] OrderDto order)
     {
-        HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
+        _httpContextAccessor.HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
+        Console.WriteLine("Order saved to session: " + HttpContext.Session.GetString(JsonConvert.SerializeObject(order)));
+        Console.WriteLine("Session ID in Payment: " + HttpContext.Session.Id);
         var request = HttpContext.Request;
         var hostAddress = request.Host.Value;
         string url = _configuration["VNPAY:Url"];
@@ -74,62 +79,77 @@ public class VnPayController : BaseApiController
 
         return Ok(paymentUrl);
     }
+
     [HttpGet("PaymentConfirm")]
     public async Task<IActionResult> PaymentConfirm()
     {
-        var deserializedObject = JsonConvert.DeserializeObject<OrderDto>(HttpContext.Session.GetString("Order"));
-        if (Request.Query.Count > 0)
+        try
         {
-            string hashSecret = _configuration["VNPAY:HashSecret"]; //Chuỗi bí mật
-            var vnpayData = Request.Query.AsEnumerable();
-            PayLib pay = new PayLib();
+            var orderJson = _httpContextAccessor.HttpContext.Session.GetString("Order");
+            Console.WriteLine("Session ID in PaymentConfirm: " + HttpContext.Session.Id);
 
-            //lấy toàn bộ dữ liệu được trả về
-            foreach (var s in vnpayData)
+            if (string.IsNullOrEmpty(orderJson))
             {
-                pay.AddResponseData(s.Key, s.Value);
+                Console.WriteLine("Session is empty or order data is missing.");
+                return Redirect($"http://localhost:3000/payment-result?status=error&message=OrderNotFound");
+
             }
 
-            long orderId = Convert.ToInt64(pay.GetResponseData("vnp_TxnRef")); //mã hóa đơn
-            long vnpayTranId = Convert.ToInt64(pay.GetResponseData("vnp_TransactionNo")); //mã giao dịch tại hệ thống VNPAY
-            string vnp_ResponseCode = pay.GetResponseData("vnp_ResponseCode"); //response code: 00 - thành công, khác 00 - xem thêm https://sandbox.vnpayment.vn/apis/docs/bang-ma-loi/
-            string vnp_SecureHash = Request.Query["vnp_SecureHash"]; //hash của dữ liệu trả về
-
-            bool checkSignature = pay.ValidateSignatureHmacSHA512(vnp_SecureHash, hashSecret); //check chữ ký đúng hay không?
-
-            if (checkSignature)
+            var deserializedObject = JsonConvert.DeserializeObject<OrderDto>(orderJson);
+            if (deserializedObject == null)
             {
-                if (vnp_ResponseCode == "00")
+                return Redirect($"http://localhost:3000/payment-result?status=error&message=DeserializationFailed");
+            }
+
+            Console.WriteLine("Order data retrieved from session: " + JsonConvert.SerializeObject(deserializedObject));
+            Console.WriteLine($"Session ID in PaymentConfirm: {HttpContext.Session.Id}");
+
+            if (Request.Query.Count > 0)
+            {
+                string hashSecret = _configuration["VNPAY:HashSecret"];
+                var vnpayData = Request.Query.AsEnumerable();
+                PayLib pay = new PayLib();
+
+                foreach (var s in vnpayData)
                 {
-                    //Thanh toán thành công
-                    //ViewBag.Message = "Thanh toán thành công hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId;
-                    if (deserializedObject != null)
+                    pay.AddResponseData(s.Key, s.Value);
+                }
+
+                long vnpayTranId = Convert.ToInt64(pay.GetResponseData("vnp_TransactionNo"));
+                string vnp_ResponseCode = pay.GetResponseData("vnp_ResponseCode");
+                string vnp_SecureHash = Request.Query["vnp_SecureHash"];
+
+                bool checkSignature = pay.ValidateSignatureHmacSHA512(vnp_SecureHash, hashSecret);
+
+                if (checkSignature)
+                {
+                    if (vnp_ResponseCode == "00")
                     {
-                        var updatess = await _orderService.CreateOrder(deserializedObject);
-                        return Ok(updatess.IsSuccessed
-                            ? new ApiSuccessResult<string>("Thêm thành công")
-                            : new ApiErrorResult<string>("Có lỗi"));
+                        var updateResult = await _orderService.CreateOrder(deserializedObject);
+                        if (updateResult.IsSuccessed)
+                        {
+                            return Redirect($"http://localhost:3000/payment-result?status=success");
+                        }
+                        return Redirect($"http://localhost:3000/payment-result?status=error&message=OrderCreationFailed");
                     }
                     else
                     {
-                        return Ok(new ApiSuccessResult<string>("deserializedObject bị NULL"));
+                        return Redirect($"http://localhost:3000/payment-result?status=failed&error={vnp_ResponseCode}");
                     }
                 }
                 else
                 {
-                    //Thanh toán không thành công. Mã lỗi: vnp_ResponseCode
-                    return Ok(new ApiSuccessResult<string>("vnp_ResponseCode"));
-                    //ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý hóa đơn " + orderId + " | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode;
+                    return Redirect($"http://localhost:3000/payment-result?status=invalid-signature");
                 }
             }
-            else
-            {
-                return Ok(new ApiSuccessResult<string>("vnp_ResponseCode"));
-                //ViewBag.Message = "Có lỗi xảy ra trong quá trình xử lý";
-            }
+            return Redirect($"http://localhost:3000/payment-result?status=error&message=NoQueryData");
         }
-
-        //return RedirectToAction("CheckoutSuccess", "Paypal");
-        return Ok("Lỗi tạo");
+        catch (Exception ex)
+        {
+            // Log the exception
+            Console.WriteLine($"Error in PaymentConfirm: {ex.Message}");
+            // You might want to log the full exception details in a production environment
+            return Redirect($"http://localhost:3000/payment-result?status=error&message={Uri.EscapeDataString(ex.Message)}");
+        }
     }
 }

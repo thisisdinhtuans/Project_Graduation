@@ -181,7 +181,10 @@ public class OrderService : IOrderService
         //     {
         //         return new ApiErrorResult<bool>("Nhà hàng với địa chỉ này đã tồn tại.");
         //     }
-
+        if (orderDto.OrderId == null)
+        {
+            return new ApiErrorResult<bool>("Order ID cannot be null.");
+        }
         var order = await _orderRepository.GetByIdAsync(orderDto.OrderId);
         if (order == null) throw new Exception("Order not found");
 
