@@ -241,7 +241,7 @@ public class OrderService : IOrderService
         Phone = orderDto.Phone,
         Deposit = orderDto.Deposit,
         CreatedBy = createdBy,
-        CreatedDate = DateTime.UtcNow,
+        CreatedDate = DateTime.Now,
         Payment= orderDto.Payment,
         VAT=orderDto.VAT,
         NumberOfCustomer=orderDto.NumberOfCustomer,
@@ -259,7 +259,7 @@ public class OrderService : IOrderService
         NumberOfCustomer = x.NumberOfCustomer,
         Quantity = x.Quantity,
         CreatedBy = createdBy,
-        CreatedDate = DateTime.UtcNow,
+        CreatedDate = DateTime.Now,
     }).ToList();
 
     // Lưu OrderDetails
