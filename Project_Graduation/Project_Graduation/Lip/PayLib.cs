@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 
-namespace Project_SEP490_G64_Summer24_BackEnd.Lip
+namespace Project_Graduation.Lip
 {
     public class Util
     {

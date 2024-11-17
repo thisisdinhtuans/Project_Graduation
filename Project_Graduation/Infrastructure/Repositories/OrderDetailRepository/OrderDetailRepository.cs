@@ -20,4 +20,18 @@ public class OrderDetailRepository : BaseRepository<OrderDetail>, IOrderDetailRe
                 .FirstOrDefaultAsync(od => od.DishId == dishId && od.OrderId == orderId);
         }
 
+    public async Task<List<OrderDetail>> AddAsync(List<OrderDetail> orderDetails)
+    {
+        if (orderDetails == null)
+        {
+            throw new ArgumentNullException(nameof(orderDetails));
+        }
+
+        // Thêm order vào DbSet
+        await _dbContext.OrderDetails.AddRangeAsync(orderDetails);
+        // L?u các thay ??i vào database
+        await _dbContext.SaveChangesAsync();
+        return orderDetails;
+    }
+
 }

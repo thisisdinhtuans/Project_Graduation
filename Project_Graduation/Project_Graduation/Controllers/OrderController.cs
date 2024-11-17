@@ -137,4 +137,21 @@ public class OrderController : BaseApiController
             }
             return BadRequest(result.Message);
         }
-}
+    //[HttpPost("create")]
+    //    [Authorize]
+    //    public async Task<IActionResult> AddOrder([FromBody] OrderDto request)
+    //    {
+    //        // Kiểm tra ModelState
+    //        if (!ModelState.IsValid)
+    //        {
+    //            return BadRequest(ModelState);
+    //        }
+
+    //        // Lấy tên người dùng từ HttpContext (JWT token)
+    //        var userName = HttpContext.User.Identity.Name;
+
+    //        var result = await _orderService.AddOrder(request, userName, UserId);
+    //        if (!result.IsSuccessed == true) return BadRequest();
+    //        return Ok(result);
+    //    }
+    }

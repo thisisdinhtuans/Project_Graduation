@@ -7,4 +7,5 @@ namespace Infrastructure.Repositories.OrderDetailRepository;
 public interface IOrderDetailRepository : IBaseRepository<OrderDetail>
 {
     Task<OrderDetail> GetByDishIdAndOrderId(int dishId, int orderId);
+    Task<List<OrderDetail>> AddAsync(List<OrderDetail> orderDetails);
 }

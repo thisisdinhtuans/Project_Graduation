@@ -33,7 +33,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Project_Graduation.Controllers;
-using Project_SEP490_G64_Summer24_BackEnd.Lip;
+using Project_Graduation.Lip;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -157,11 +157,15 @@ builder.Services.AddScoped<VnPayController>();
 
 builder.Services.AddHttpContextAccessor();
 //builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddCors(c =>
+builder.Services.AddCors(options =>
 {
-    c.AddPolicy("AllowOrigin", options => options.AllowAnyOrigin().AllowAnyMethod().
-     AllowAnyHeader());
+    options.AddPolicy("CorsPolicy", builder => builder
+        .WithOrigins("https://gocque.vercel.app")
+        .AllowAnyMethod()
+        .AllowAnyHeader()
+        .AllowCredentials());
 });
+
 //builder.Services.AddControllersWithViews()
 //                .AddNewtonsoftJson(options =>
 //                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
@@ -172,20 +176,34 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-app.UseHttpsRedirection();
-app.UseMiddleware<ExceptionMiddleware>();
-app.UseHttpsRedirection();
-app.UseRouting();
-
+//app.UseSession();
+//app.UseMiddleware<ExceptionMiddleware>();
 
 // Configure the HTTP request pipeline
 
-app.UseCors("AllowOrigin");
+//app.UseHttpsRedirection(); // Đặt trước UseRouting và UseAuthorization
+//app.UseRouting();
+//app.UseCors("CorsPolicy");
+//app.UseAuthentication();
+//app.UseAuthorization();
 
+//app.UseSession(); // Đặt trước UseRouting
+//app.UseAuthentication();
+//app.UseAuthorization();
+//app.UseHttpsRedirection();
+//app.UseRouting();
+//app.UseCors("CorsPolicy");
+//app.UseMiddleware<ExceptionMiddleware>();
 
-app.UseAuthentication();
-app.UseAuthorization();
-app.UseSession();
+app.UseHttpsRedirection();
+
+app.UseSession(); // Ensure session middleware is before routing and authentication
+app.UseRouting(); // UseRouting should come before UseAuthentication and UseAuthorization
+app.UseAuthentication(); // Required for JWT-based authentication
+app.UseAuthorization();  // Required for authorization policies to work
+app.UseCors("CorsPolicy"); // CORS should be placed correctly depending on the flow
+
+app.UseMiddleware<ExceptionMiddleware>();
 
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<Project_Graduation_Context>();

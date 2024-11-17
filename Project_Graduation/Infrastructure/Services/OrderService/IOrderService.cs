@@ -19,4 +19,5 @@ public interface IOrderService
     Task<bool> AssignTableToOrder(int orderId, int tableId);
     // Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);
     Task<ApiResult<List<OrderDto>>> ViewOrderHistory(string username);
+    Task<ApiResult<bool>> AddOrder(OrderDto orderDto, string createdBy, string UserId);
 }

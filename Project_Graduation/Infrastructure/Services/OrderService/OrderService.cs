@@ -94,6 +94,7 @@ public class OrderService : IOrderService
 
         var order = new Order
     {
+        CreatedBy= _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
         RestaurantID = orderDto.RestaurantID,
         UserName = orderDto.UserName,
         PriceTotal = orderDto.PriceTotal,
@@ -226,5 +227,43 @@ public class OrderService : IOrderService
         var orders=await _orderRepository.GetByCondition(x=>x.UserName==username);
         var ordersDto=_mapper.Map<List<OrderDto>>(orders.ToList());
         return new ApiSuccessResult<List<OrderDto>>(ordersDto);
+    }
+
+    public async Task<ApiResult<bool>> AddOrder(OrderDto orderDto, string createdBy, string UserId)
+{
+        var order = new Order
+        {
+        RestaurantID = orderDto.RestaurantID,
+        UserName = orderDto.UserName,
+        PriceTotal = orderDto.PriceTotal,
+        Date = orderDto.Date,
+        Time = orderDto.Time,
+        Phone = orderDto.Phone,
+        Deposit = orderDto.Deposit,
+        CreatedBy = createdBy,
+        CreatedDate = DateTime.UtcNow,
+        Payment= orderDto.Payment,
+        VAT=orderDto.VAT,
+        NumberOfCustomer=orderDto.NumberOfCustomer,
+        Discount=orderDto.Discount,
+    };
+
+    await _orderRepository.AddAsync(order);
+    var orderDetails = orderDto.OrderDetailDtos.Select(x => new OrderDetail
+    {
+        UserId = UserId,
+        OrderId = order.OrderId,  // Gán OrderId đã được tạo
+        Price = x.Price,
+        Description = x.Description,
+        DishId = x.DishId,
+        NumberOfCustomer = x.NumberOfCustomer,
+        Quantity = x.Quantity,
+        CreatedBy = createdBy,
+        CreatedDate = DateTime.UtcNow,
+    }).ToList();
+
+    // Lưu OrderDetails
+    await _orderDetailRepository.AddAsync(orderDetails);
+    return new ApiSuccessResult<bool>(true);
     }
 }

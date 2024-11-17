@@ -25,6 +25,19 @@ public class OrderRepository:BaseRepository<Order>, IOrderRepository
         return order;
     }
 
+    public async Task<Order> AddAsync(Order order)
+    {
+        if (order == null)
+        {
+            throw new ArgumentNullException(nameof(order));
+        }
+
+            // Thêm order vào DbSet
+            await _dbContext.Orders.AddAsync(order);
+            // L?u các thay ??i vào database
+            await _dbContext.SaveChangesAsync();
+        return order;
+    }
     public async Task<bool> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId)
     {
         var orderDetail=await _dbContext.OrderDetails.Where(o=>o.OrderId==orderId && o.Id==orderDetailId && o.DishId==dishId).FirstOrDefaultAsync();
