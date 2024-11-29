@@ -5,7 +5,7 @@ using Domain.Enums;
 using Domain.Models.Common;
 using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Order;
-using Domain.Models.Dto.OrderDetails;
+// using Domain.Models.Dto.OrderDetails;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.OrderDetailRepository;
 using Infrastructure.Repositories.OrderRepository;
@@ -30,7 +30,59 @@ public class OrderService : IOrderService
         _tableRepository = tableRepository;
         _httpContextAccessor = httpContextAccessor;
     }
+    public async Task<bool> UpdateOrderDetailsAsync(OrderDetailUpdateRequest request)
+    {
+        var order = await _orderRepository.GetByIdAsync(request.OrderID);
+        if (order == null)
+        {
+            throw new Exception("Order không tồn tại.");
+        }
 
+        foreach (var orderDetailDto in request.OrderDetails)
+        {
+            var existingOrderDetail = await _orderDetailRepository.GetByDishIdAndOrderId(orderDetailDto.DishId, request.OrderID);
+            if (existingOrderDetail != null)
+            {
+                if (orderDetailDto.Quantity == 0)
+                {
+                    // Xóa món ăn
+                    await _orderDetailRepository.Delete(existingOrderDetail);
+                    Console.WriteLine($"Deleted OrderDetail with Id: {existingOrderDetail.Id}");
+                }
+                else
+                {
+                    // Cập nhật món ăn
+                    existingOrderDetail.Quantity = orderDetailDto.Quantity;
+                    existingOrderDetail.Price = orderDetailDto.Price;
+                    await _orderDetailRepository.Update(existingOrderDetail);
+                    Console.WriteLine($"Updated OrderDetail with Id: {existingOrderDetail.Id}");
+                }
+            }
+            else
+            {
+                // Thêm món ăn mới
+                var newOrderDetail = new OrderDetail
+                {
+                    CreatedBy= _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
+                    CreatedDate= DateTime.Now,
+                    OrderId = request.OrderID,
+                    DishId = orderDetailDto.DishId,
+                    Quantity = orderDetailDto.Quantity,
+                    Price = orderDetailDto.Price,
+                    UserId= _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                };
+                await _orderDetailRepository.Add(newOrderDetail);
+                Console.WriteLine($"Created new OrderDetail for OrderID: {request.OrderID}");
+            }
+        }
+        var updatedOrderDetails = await _orderDetailRepository.GetByCondition(x => x.OrderId == request.OrderID);
+            double newPriceTotal = updatedOrderDetails.Sum(x => x.Price * x.Quantity);
+
+        order.PriceTotal = newPriceTotal;
+        await _orderRepository.Update(order);
+
+        return true;
+    }
     public async Task<bool> ArrangeTableToOrder(int orderId, int tableId)
     {
         var order=await _orderRepository.GetByIdAsync(orderId);
@@ -202,6 +254,16 @@ public class OrderService : IOrderService
         {
             return new ApiErrorResult<bool>(ex.Message);
         }
+    }
+
+    public async Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId)
+    {
+        var result = await _orderRepository.DeleteDishFromOrderDetail(orderId, orderDetailId, dishId);
+        if (result)
+        {
+            return new ApiSuccessResult<bool>(true);
+        }
+        return new ApiErrorResult<bool>("Failed to delete dish from order detail");
     }
 
     public async Task<ApiResult<bool>> UpdateOrderStatus(int orderId, EnumOrder newStatus)

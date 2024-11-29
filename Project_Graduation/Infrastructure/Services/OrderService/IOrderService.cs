@@ -2,8 +2,7 @@ using System;
 using Domain.Enums;
 using Domain.Models.Common.ApiResult;
 using Domain.Models.Dto.Order;
-using Domain.Models.Dto.OrderDetails;
-using Infrastructure.Entities;
+// using Domain.Models.Dto.OrderDetails;
 
 namespace Infrastructure.Services.OrderService;
 
@@ -19,5 +18,7 @@ public interface IOrderService
     Task<bool> AssignTableToOrder(int orderId, int tableId);
     // Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);
     Task<ApiResult<List<OrderDto>>> ViewOrderHistory(string username);
+    Task<bool> UpdateOrderDetailsAsync(OrderDetailUpdateRequest request);
     Task<ApiResult<bool>> AddOrder(OrderDto orderDto, string createdBy, string UserId);
+    Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);
 }

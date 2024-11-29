@@ -18,6 +18,32 @@ public class OrderRepository:BaseRepository<Order>, IOrderRepository
         _dbContext = dbContext;
     }
 
+    // public async Task<bool> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId)
+    // {
+    //     var orderDetail = await _dbContext.OrderDetails
+    //         .FirstOrDefaultAsync(od => od.OrderId == orderId && od.Id == orderDetailId && od.DishId == dishId);
+
+    //     if (orderDetail == null)
+    //     {
+    //         return false;
+    //     }
+
+    //     _dbContext.OrderDetails.Remove(orderDetail);
+    //     await _dbContext.SaveChangesAsync();
+    
+    //     var order = await _dbContext.Orders
+    //         .Include(o => o.OrderDetails)
+    //         .FirstOrDefaultAsync(o => o.OrderId == orderId);
+
+    //     if (order != null)
+    //     {
+    //         order.PriceTotal = order.OrderDetails.Sum(od => od.Price * od.Quantity);
+    //         await _dbContext.SaveChangesAsync();
+    //     }
+
+    //     return true;
+    // }
+
     public async Task<Order> CreateOrder(Order order)
     {
         _dbContext.Orders.Add(order);
@@ -32,9 +58,9 @@ public class OrderRepository:BaseRepository<Order>, IOrderRepository
             throw new ArgumentNullException(nameof(order));
         }
 
-            // Thêm order vào DbSet
+            // Thï¿½m order vï¿½o DbSet
             await _dbContext.Orders.AddAsync(order);
-            // L?u các thay ??i vào database
+            // L?u cï¿½c thay ??i vï¿½o database
             await _dbContext.SaveChangesAsync();
         return order;
     }

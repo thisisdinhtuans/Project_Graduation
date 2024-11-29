@@ -2,6 +2,7 @@ using System;
 using AutoMapper;
 using Domain.Models.Common;
 using Domain.Models.Common.ApiResult;
+using Domain.Models.Dto.Order;
 using Domain.Models.Dto.OrderDetails;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.OrderDetailRepository;
@@ -63,7 +64,7 @@ public class OrderDetailService: IOrderDetailService
         //         return new ApiErrorResult<bool>("Khu vực  này đã tồn tại.");
         //     }
 
-        var orderDetail = await _orderDetailRepository.GetByIdAsync(orderDetailDto.OrderId);
+        var orderDetail = await _orderDetailRepository.GetByIdAsync(orderDetailDto.OrderID);
         if (orderDetail == null) throw new Exception("OrderDetail not found");
 
         _mapper.Map(orderDetailDto, orderDetail);

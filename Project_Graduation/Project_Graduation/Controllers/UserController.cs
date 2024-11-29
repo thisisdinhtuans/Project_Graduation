@@ -119,4 +119,24 @@ public class UserController:BaseApiController {
         }
         return Ok("Đổi mật khẩu thành công");
     }
+
+    [AllowAnonymous]
+        [HttpGet("check-user-exists")]
+        
+        public async Task<IActionResult> CheckUserExists([FromQuery] string userName, [FromQuery] string email)
+        {
+            if (string.IsNullOrEmpty(userName) && string.IsNullOrEmpty(email))
+            {
+                return BadRequest("Username or email must be provided.");
+            }
+
+            var result = await _userService.CheckUserExists(userName, email);
+
+            if (!result.IsSuccessed)
+            {
+                return Ok(new { Success = false, Message = result.Message });
+            }
+
+            return Ok(new { Success = true, Message = "Username and email are available." });
+        }
 }

@@ -6,6 +6,8 @@ using Domain.Models.Dto.Category;
 using Domain.Models.Dto.Dish;
 using Domain.Models.Dto.Order;
 using Domain.Models.Dto.OrderDetails;
+
+// using Domain.Models.Dto.OrderDetails;
 using Domain.Models.Dto.Restaurant;
 using Domain.Models.Dto.Staff;
 using Domain.Models.Dto.Table;
@@ -48,15 +50,15 @@ public class MappingProfiles: Profile
             CreateMap<AppUser, StaffCreateDto>();
             CreateMap<StaffCreateDto, AppUser>();
 
-            CreateMap<OrderDetailUpdateRequest, OrderDetailDto>();
+            CreateMap<OrderDetailUpdateDto, OrderDto>();
             CreateMap<OrderDetailDto, OrderDetail>();
             CreateMap<OrderDetail,OrderDetailDto>();
 
             CreateMap<OrderDto, Order>();
             CreateMap<Order,OrderDto>();
 
-            CreateMap<OrderDetailUpdateRequest ,OrderDetail>();
-            CreateMap<OrderDetail ,OrderDetailUpdateRequest>();
+            CreateMap<OrderDetailUpdateDto ,OrderDetail>();
+            CreateMap<OrderDetail ,OrderDetailUpdateDto>();
 
 
     }

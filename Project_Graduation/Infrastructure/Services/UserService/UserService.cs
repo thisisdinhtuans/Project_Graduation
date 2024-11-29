@@ -264,4 +264,20 @@ public class UserService : IUserService
         }
         return new ApiSuccessResult<bool>(true);
     }
+    public async Task<ApiResult<bool>> CheckUserExists(string userName, string email)
+    {
+        var userByUserName = await _userManager.FindByNameAsync(userName);
+        if (userByUserName != null)
+        {
+            return new ApiErrorResult<bool>("Username already exists.");
+        }
+
+        var userByEmail = await _userManager.FindByEmailAsync(email);
+        if (userByEmail != null)
+        {
+            return new ApiErrorResult<bool>("Email already exists.");
+        }
+
+        return new ApiSuccessResult<bool>(true);
+    }
 }

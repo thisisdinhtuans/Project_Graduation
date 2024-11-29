@@ -5,6 +5,7 @@ namespace Domain.Models.Dto.OrderDetails;
 public class OrderDetailDto
 {
     public int Id { get; set; }
+    public string Name { get; set; }
     public double Price { get; set; }
     public string Description { get; set; }=string.Empty;
     public int DishId { get; set; }

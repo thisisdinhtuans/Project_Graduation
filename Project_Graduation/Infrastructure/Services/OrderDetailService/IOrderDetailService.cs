@@ -1,5 +1,6 @@
 using System;
 using Domain.Models.Common.ApiResult;
+using Domain.Models.Dto.Order;
 using Domain.Models.Dto.OrderDetails;
 using Infrastructure.Entities;
 

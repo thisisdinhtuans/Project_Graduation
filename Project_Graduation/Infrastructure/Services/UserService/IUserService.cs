@@ -15,4 +15,5 @@ public interface IUserService
     public Task<UserRequestDto> GetById(Guid id);
     public Task<ApiResult<string>> BanUser(Guid userId);
     Task<ApiResult<List<UserRequestDto>>> GetAllCustomer();
+    Task<ApiResult<bool>> CheckUserExists(string userName, string email);
 }
