@@ -29,7 +29,11 @@ public class RoleService : IRoleService
     public async Task<bool> Edit(RoleRequestDto request)
     {
         var val = await _roleManager.FindByIdAsync(request.Id.ToString());
-            if (val.Name == null)
+        if (val == null)  
+        {
+            return false; 
+        }
+        if (val.Name == null)
             {
                 return false;
             }
@@ -52,7 +56,11 @@ public class RoleService : IRoleService
     public async Task<RoleRequestDto> GetById(string id)
     {
         var val = await _roleManager.FindByIdAsync(id);
-            if (val.Name != null)
+        if (val == null)
+        {
+            throw new Exception("Role not found"); 
+        }
+        if (val.Name != null)
             {
                 var role = new RoleRequestDto()
                 {

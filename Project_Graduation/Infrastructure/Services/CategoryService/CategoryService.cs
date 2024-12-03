@@ -60,7 +60,7 @@ public class CategoryService: ICategoryService
         _mapper.Map(categoryDto, category);
         // category.UpdatedDate = DateTime.Now;
         // category.UpdatedBy = _httpContextAccessor.HttpContext.User.Identity.Name;
-        await _categoryRepository.Update(category);
+        //await _categoryRepository.Update(category);
         try
         {
             await _categoryRepository.Update(category);

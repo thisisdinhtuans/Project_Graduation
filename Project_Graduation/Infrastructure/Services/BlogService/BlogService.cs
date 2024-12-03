@@ -60,7 +60,7 @@ public class BlogService: IBlogService
         _mapper.Map(blogDto, blog);
         // blog.UpdatedDate = DateTime.Now;
         // blog.UpdatedBy = _httpContextAccessor.HttpContext.User.Identity.Name;
-        await _blogRepository.Update(blog);
+        //await _blogRepository.Update(blog);
         try
         {
             await _blogRepository.Update(blog);

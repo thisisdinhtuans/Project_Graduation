@@ -1,80 +1,116 @@
-﻿using AutoMapper;
+﻿using Moq;
+using Xunit;
+using System;
+using System.Threading.Tasks;
+using AutoMapper;
 using Domain.Models.Dto.Area;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.AreaRepository;
 using Infrastructure.Services.AreaService;
-using Moq;
+using System.Linq.Expressions;
 
-namespace UnitTest.Areas
+public class Create
 {
-    public class Create
+    private readonly Mock<IAreaRepository> _mockAreaRepository;
+    private readonly Mock<IRestaurantRepository> _mockRestaurantRepository;
+    private readonly Mock<IMapper> _mockMapper;
+    private readonly AreaService _areaService;
+
+    public Create()
     {
+        _mockAreaRepository = new Mock<IAreaRepository>();
+        _mockRestaurantRepository = new Mock<IRestaurantRepository>();
+        _mockMapper = new Mock<IMapper>();
+        _areaService = new AreaService(
+            _mockAreaRepository.Object,
+            _mockRestaurantRepository.Object,
+            _mockMapper.Object);
+    }
 
-        private readonly Mock<IAreaRepository> _areaRepositoryMock;
-        private readonly Mock<IRestaurantRepository> _restaurantRepositoryMock;
-        private readonly Mock<IMapper> _mapperMock;
-        private readonly AreaService _areaService;
+    [Fact]
+    public async Task CreateAreaAsync_ShouldReturnError_WhenRestaurantDoesNotExist()
+    {
+        // Arrange
+        var createAreaDto = new CreateAreaDto { AreaName = "Test Area", RestaurantID = 1 };
+        _mockRestaurantRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync((Restaurant)null); // Restaurant does not exist
 
-        public Create()
-        {
-            _areaRepositoryMock = new Mock<IAreaRepository>();
-            _restaurantRepositoryMock = new Mock<IRestaurantRepository>();
-            _mapperMock = new Mock<IMapper>();
-            _areaService = new AreaService(
-                _areaRepositoryMock.Object,
-                _restaurantRepositoryMock.Object,
-                _mapperMock.Object
-            );
-        }
+        // Act
+        var result = await _areaService.CreateAreaAsync(createAreaDto);
 
-        [Fact]
-        public async Task CreateAreaAsync_ShouldReturnError_WhenRestaurantDoesNotExist()
-        {
-            // Arrange
-            var areaDto = new CreateAreaDto { RestaurantID = 1, AreaName = "Test Area" };
-            _restaurantRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync((Restaurant)null);
+        // Assert
+        Assert.False(result.IsSuccessed);
+        Assert.Equal("Nhà hàng này không tồn tại", result.Message);
+        _mockAreaRepository.Verify(repo => repo.AnyAsync(It.IsAny<Expression<Func<Area, bool>>>()), Times.Never);
+        _mockAreaRepository.Verify(repo => repo.Add(It.IsAny<Area>()), Times.Never);
+    }
 
-            // Act
-            var result = await _areaService.CreateAreaAsync(areaDto);
+    [Fact]
+    public async Task CreateAreaAsync_ShouldReturnError_WhenAreaAlreadyExists()
+    {
+        // Arrange
+        var createAreaDto = new CreateAreaDto { AreaName = "Test Area", RestaurantID = 1 };
+        var restaurant = new Restaurant { RestaurantID = 1 };
 
-            // Assert
-            Assert.False(result.IsSuccessed);
-            Assert.Equal("Nhà hàng này không tồn tại", result.Message);
-        }
+        _mockRestaurantRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(restaurant);
+        _mockAreaRepository.Setup(repo => repo.AnyAsync(It.IsAny<Expression<Func<Area, bool>>>()))
+            .ReturnsAsync(true); // Simulate that the area already exists
 
-        [Fact]
-        public async Task CreateAreaAsync_ShouldReturnError_WhenAreaAlreadyExists()
-        {
-            // Arrange
-            var areaDto = new CreateAreaDto { RestaurantID = 1, AreaName = "Test Area" };
-            _restaurantRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(new Restaurant());
-            _areaRepositoryMock.Setup(x => x.AnyAsync(It.IsAny<System.Linq.Expressions.Expression<Func<Area, bool>>>()))
-                .ReturnsAsync(true);
+        // Act
+        var result = await _areaService.CreateAreaAsync(createAreaDto);
 
-            // Act
-            var result = await _areaService.CreateAreaAsync(areaDto);
+        // Assert
+        Assert.False(result.IsSuccessed);
+        Assert.Equal("Khu vực  này đã tồn tại.", result.Message);
+        _mockAreaRepository.Verify(repo => repo.Add(It.IsAny<Area>()), Times.Never);
+    }
 
-            // Assert
-            Assert.False(result.IsSuccessed);
-            Assert.Equal("Khu vực  này đã tồn tại.", result.Message);
-        }
 
-        [Fact]
-        public async Task CreateAreaAsync_ShouldReturnSuccess_WhenAreaCreatedSuccessfully()
-        {
-            // Arrange
-            var areaDto = new CreateAreaDto { RestaurantID = 1, AreaName = "New Area" };
-            var area = new Area();
-            _restaurantRepositoryMock.Setup(x => x.GetByIdAsync(It.IsAny<int>())).ReturnsAsync(new Restaurant());
-            _areaRepositoryMock.Setup(x => x.AnyAsync(It.IsAny<System.Linq.Expressions.Expression<Func<Area, bool>>>()))
-                .ReturnsAsync(false);
-            _mapperMock.Setup(x => x.Map<Area>(areaDto)).Returns(area);
+    [Fact]
+    public async Task CreateAreaAsync_ShouldReturnSuccess_WhenAreaIsCreatedSuccessfully()
+    {
+        // Arrange
+        var createAreaDto = new CreateAreaDto { AreaName = "Test Area", RestaurantID = 1 };
+        var restaurant = new Restaurant { RestaurantID = 1 };
+        var area = new Area { AreaName = "Test Area", RestaurantID = 1 };
 
-            // Act
-            var result = await _areaService.CreateAreaAsync(areaDto);
+        _mockRestaurantRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(restaurant);
+        _mockAreaRepository.Setup(repo => repo.AnyAsync(It.IsAny<Expression<Func<Area, bool>>>()))
+        .ReturnsAsync(false);
+        _mockMapper.Setup(mapper => mapper.Map<Area>(createAreaDto))
+            .Returns(area);
 
-            // Assert
-            Assert.True(result.IsSuccessed);
-        }
+        // Act
+        var result = await _areaService.CreateAreaAsync(createAreaDto);
+
+        // Assert
+        Assert.True(result.IsSuccessed);
+        Assert.True(result.ResultObj);
+        _mockAreaRepository.Verify(repo => repo.Add(It.IsAny<Area>()), Times.Once);
+    }
+
+    [Fact]
+    public async Task CreateAreaAsync_ShouldReturnError_WhenExceptionOccurs()
+    {
+        // Arrange
+        var createAreaDto = new CreateAreaDto { AreaName = "Test Area", RestaurantID = 1 };
+        var restaurant = new Restaurant { RestaurantID = 1 };
+
+        _mockRestaurantRepository.Setup(repo => repo.GetByIdAsync(It.IsAny<int>()))
+            .ReturnsAsync(restaurant);
+        _mockAreaRepository.Setup(repo => repo.AnyAsync(It.IsAny<Expression<Func<Area, bool>>>()))
+        .ReturnsAsync(false);
+        _mockAreaRepository.Setup(repo => repo.Add(It.IsAny<Area>()))
+            .ThrowsAsync(new Exception("Database error"));
+
+        // Act
+        var result = await _areaService.CreateAreaAsync(createAreaDto);
+
+        // Assert
+        Assert.False(result.IsSuccessed);
+        Assert.Equal("Database error", result.Message);
+        _mockAreaRepository.Verify(repo => repo.Add(It.IsAny<Area>()), Times.Once);
     }
 }

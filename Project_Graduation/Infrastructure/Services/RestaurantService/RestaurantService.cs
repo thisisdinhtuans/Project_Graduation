@@ -60,7 +60,7 @@ public class RestaurantService: IRestaurantService
         _mapper.Map(restaurantDto, restaurant);
         // restaurant.UpdatedDate = DateTime.Now;
         // restaurant.UpdatedBy = _httpContextAccessor.HttpContext.User.Identity.Name;
-        await _restaurantRepository.Update(restaurant);
+        //await _restaurantRepository.Update(restaurant);
         try
         {
             await _restaurantRepository.Update(restaurant);

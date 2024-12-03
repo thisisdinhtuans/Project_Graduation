@@ -11,6 +11,7 @@
           "Domain": "1.0.0",
           "Infrastructure": "1.0.0",
           "Library": "1.0.0",
+          "Microsoft.EntityFrameworkCore": "6.0.31",
           "Microsoft.NET.Test.Sdk": "17.5.0",
           "Moq": "4.20.72",
           "Project_Graduation": "1.0.0",

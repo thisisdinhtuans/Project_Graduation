@@ -81,6 +81,11 @@ public class AreaService: IAreaService
 
     public async Task<ApiResult<bool>> DeleteAreaAsync(int id)
     {
+        if (id <= 0)
+        {
+            return new ApiErrorResult<bool>("Id không hợp lệ.");
+        }
+
         var area = await _areaRepository.GetByIdAsync(id);
         if (area == null)
         {
@@ -99,16 +104,31 @@ public class AreaService: IAreaService
     }
 
 
+
     public async Task<ApiResult<Area>> GetAreaByIdAsync(int id)
     {
-        var area= await _areaRepository.GetByIdAsync(id);
-        return new ApiSuccessResult<Area>(area);
+        try
+        {
+            var area = await _areaRepository.GetByIdAsync(id);
+            return new ApiSuccessResult<Area>(area);
+        }
+        catch (Exception ex)
+        {
+            return new ApiErrorResult<Area>(ex.Message);
+        }
     }
 
     public async Task<ApiResult<List<AreaDto>>> GetAllAreasAsync()
     {
-        var areas = await _areaRepository.GetAllAsync(); // Lấy tất cả nhà hàng từ Repository
-        var areasDto=_mapper.Map<List<AreaDto>>(areas); // Chuyển đổi sang DTO
-        return new ApiSuccessResult<List<AreaDto>>(areasDto);
+        try
+        {
+            var areas = await _areaRepository.GetAllAsync(); // Lấy tất cả nhà hàng từ Repository
+            var areasDto = _mapper.Map<List<AreaDto>>(areas); // Chuyển đổi sang DTO
+            return new ApiSuccessResult<List<AreaDto>>(areasDto);
+        }
+        catch (Exception ex)
+        {
+            return new ApiErrorResult<List<AreaDto>>(ex.Message);
+        }
     }
 }

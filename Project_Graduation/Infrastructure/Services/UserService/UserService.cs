@@ -36,37 +36,66 @@ public class UserService : IUserService
             return false;
         }
 
-        public async Task<UserRequestDto> GetById(Guid id)
+    //public async Task<UserRequestDto> GetById(Guid id)
+    //{
+    //    var user = await _userManager.FindByIdAsync(id.ToString());
+    //    if (user == null)
+    //    {
+    //        return new UserRequestDto();
+    //    }
+    //    var roles = await _userManager.GetRolesAsync(user);
+    //    //var userOperations = await _userOperationRepository.GetByCondition(x => x.UserId == user.Id);
+    //    //var operations = await _operationRepository.GetAll();
+    //    var uservm = new UserRequestDto()
+    //    {
+    //        Id=user.Id,
+    //        Email = user.Email,
+    //        PhoneNumber = user.PhoneNumber,
+    //        FullName = user.FullName,
+    //        UserName = user.UserName,
+    //        Roles = roles,
+    //        Dob = user.Dob,
+    //        Gender = user.Gender,
+    //        CCCD=user.CCCD,
+    //        RestaurantID=user.RestaurantID
+
+    //        //Opes = (userOperations != null && operations != null)
+    //        //    ? userOperations.Join(operations, x1 => x1.OperationId, x2 => x2.Id, (x1, x2) => x2.Name).ToList()
+    //        //    : new List<string>()
+    //    };
+    //    return uservm;
+    //}
+    public async Task<UserRequestDto> GetById(Guid id)
+    {
+        var user = await _userManager.FindByIdAsync(id.ToString());
+        if (user == null)
         {
-            var user = await _userManager.FindByIdAsync(id.ToString());
-            if (user == null)
+            return new UserRequestDto
             {
-                return new UserRequestDto();
-            }
-            var roles = await _userManager.GetRolesAsync(user);
-            //var userOperations = await _userOperationRepository.GetByCondition(x => x.UserId == user.Id);
-            //var operations = await _operationRepository.GetAll();
-            var uservm = new UserRequestDto()
-            {
-                Id=user.Id,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                FullName = user.FullName,
-                UserName = user.UserName,
-                Roles = roles,
-                Dob = user.Dob,
-                Gender = user.Gender,
-                CCCD=user.CCCD,
-                RestaurantID=user.RestaurantID
-                
-                //Opes = (userOperations != null && operations != null)
-                //    ? userOperations.Join(operations, x1 => x1.OperationId, x2 => x2.Id, (x1, x2) => x2.Name).ToList()
-                //    : new List<string>()
+                Roles = new List<string>() // Initialize Roles to an empty list
             };
-            return uservm;
         }
 
-        public async Task<bool> RoleAssign(Guid id, RoleAssignRequestDto request)
+        var roles = await _userManager.GetRolesAsync(user);
+        var uservm = new UserRequestDto()
+        {
+            Id = user.Id,
+            Email = user.Email,
+            PhoneNumber = user.PhoneNumber,
+            FullName = user.FullName,
+            UserName = user.UserName,
+            Roles = roles,
+            Dob = user.Dob,
+            Gender = user.Gender,
+            CCCD = user.CCCD,
+            RestaurantID = user.RestaurantID
+        };
+
+        return uservm;
+    }
+
+
+    public async Task<bool> RoleAssign(Guid id, RoleAssignRequestDto request)
         {
             var user = await _userManager.FindByIdAsync(id.ToString());
             if (user == null)
