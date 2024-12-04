@@ -143,10 +143,11 @@ public class OrderService : IOrderService
         //     return new ApiErrorResult<bool>("Nhà hàng với địa chỉ này đã tồn tại.");
         // }
 
-
+        var createdBy = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
         var order = new Order
-    {
-        CreatedBy= _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
+        {
+            CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+            CreatedDate = DateTime.Now,
         RestaurantID = orderDto.RestaurantID,
         UserName = orderDto.UserName,
         PriceTotal = orderDto.PriceTotal,
@@ -164,12 +165,14 @@ public class OrderService : IOrderService
     };
 
     // Lưu Order vào cơ sở dữ liệu trước
-    await _orderRepository.Add(order);
+    await _orderRepository.CreateOrder(order);
 
     // Sau khi Order được lưu và OrderId được tạo, ta có thể gán nó cho OrderDetailDtos
     var orderDetails = orderDto.OrderDetailDtos.Select(x => new OrderDetail
     {
-        UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value, 
+        UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value??"0", 
+        CreatedDate= DateTime.Now,
+        CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
         OrderId = order.OrderId,  // Gán OrderId đã được tạo
         Price = x.Price,
         Description = x.Description,
@@ -179,7 +182,7 @@ public class OrderService : IOrderService
     }).ToList();
 
     // Lưu OrderDetails
-    await _orderDetailRepository.AddRange(orderDetails);
+    await _orderDetailRepository.AddAsync(orderDetails);
 
     return new ApiSuccessResult<bool>(true);
     }

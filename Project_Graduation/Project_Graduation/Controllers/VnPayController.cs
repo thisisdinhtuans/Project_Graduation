@@ -42,12 +42,23 @@ namespace Project_Graduation.Controllers
             }
             return ipAddress;
         }
+        //var createdBy = HttpContext.User.Identity.Name;
         [HttpPost]
         public async Task<IActionResult> Payment([FromBody] OrderDto order)
         {
             HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
-            HttpContext.Session.SetString("CreatedBy", HttpContext.User.Identity.Name);
-            HttpContext.Session.SetString("UserId", HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
+
+            // Nếu HttpContext.User.Identity.Name là null, lấy từ order.UserName
+            var createdBy = HttpContext.User.Identity.Name ?? order.UserName;
+            HttpContext.Session.SetString("CreatedBy", createdBy);
+
+            // Gán UserId, nếu không có thì mặc định là "0"
+            var userId = HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0";
+            HttpContext.Session.SetString("UserId", userId);
+
+            //HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
+            //HttpContext.Session.SetString("CreatedBy", HttpContext.User.Identity.Name);
+            //HttpContext.Session.SetString("UserId", HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value);
 
 
             //await HttpContext.Session.CommitAsync(); // Lưu session
