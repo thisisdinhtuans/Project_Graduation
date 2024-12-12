@@ -53,7 +53,7 @@ public class BlogsController : BaseApiController
 
     [Authorize(Roles = "Admin,Manager")]
     [HttpPost("add")]
-    public async Task<IActionResult> CreateBlog([FromBody] CreateBlogDto blogDto)
+    public async Task<IActionResult> CreateBlog([FromForm] CreateBlogDto blogDto)
     {
         if (!ModelState.IsValid)
         {

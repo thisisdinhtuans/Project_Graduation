@@ -16,4 +16,8 @@ public interface IUserService
     public Task<ApiResult<string>> BanUser(Guid userId);
     Task<ApiResult<List<UserRequestDto>>> GetAllCustomer();
     Task<ApiResult<bool>> CheckUserExists(string userName, string email);
+    Task<ApiResult<EmailChecked>> SendMailCheckUser(string email, string? uri = null);
+    Task<ApiResult<bool>> RenewPassword(RenewPassword obj);
+    Task<ApiResult<Tokens>> RenewToken(TokenRequestDto request);
+
 }

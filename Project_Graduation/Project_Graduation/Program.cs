@@ -132,7 +132,8 @@ builder.Services.AddIdentityCore<AppUser>(opt =>
     opt.User.RequireUniqueEmail = true;
 })
     .AddRoles<AppRole>()
-    .AddEntityFrameworkStores<Project_Graduation_Context>();
+    .AddEntityFrameworkStores<Project_Graduation_Context>()
+    .AddDefaultTokenProviders(); ;
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt=>
@@ -170,6 +171,11 @@ builder.Services.AddCors(options =>
 //                .AddNewtonsoftJson(options =>
 //                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
 //            );
+var emailConfig = builder.Configuration
+    .GetSection("EmailConfiguration")
+    .Get<EmailConfiguration>();
+builder.Services.AddSingleton(emailConfig);
+builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
 if (app.Environment.IsDevelopment())
 {

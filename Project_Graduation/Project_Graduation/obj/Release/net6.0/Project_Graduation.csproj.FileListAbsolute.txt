@@ -87,3 +87,11 @@ D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\n
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\Project_Graduation.pdb
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\Project_Graduation.genruntimeconfig.cache
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\ref\Project_Graduation.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\BouncyCastle.Cryptography.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\MailKit.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\MimeKit.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\System.Formats.Asn1.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\System.Text.Encoding.CodePages.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\bin\Release\net6.0\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
