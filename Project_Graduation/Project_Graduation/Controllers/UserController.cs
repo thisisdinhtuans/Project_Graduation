@@ -166,7 +166,7 @@ public class UserController:BaseApiController {
         {
             return BadRequest("Có lỗi xảy ra");
         }
-        var message = new Message(new string[] { email }, "ForgotPassword", resultToken.ResultObj.ClientUrl);
+        var message = new Message(new string[] { email }, "Đặt lại mật khẩu từ Nhà hàng Góc Quê", resultToken.ResultObj.ClientUrl);
         _emailSender.SendEmailAsync(message);
         return Ok(resultToken);
     }

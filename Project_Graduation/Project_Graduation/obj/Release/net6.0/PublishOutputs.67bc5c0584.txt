@@ -6,6 +6,8 @@ D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\n
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Project_Graduation.pdb
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\AutoMapper.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\BouncyCastle.Cryptography.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\MailKit.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.Internal.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
@@ -31,6 +33,7 @@ D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\n
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.OpenApi.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\MimeKit.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Newtonsoft.Json.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.Swagger.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Swashbuckle.AspNetCore.SwaggerGen.dll
@@ -38,10 +41,13 @@ D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\n
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Diagnostics.DiagnosticSource.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Drawing.Common.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Formats.Asn1.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Runtime.Caching.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.Pkcs.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Security.Permissions.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Text.Encoding.CodePages.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Text.Json.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\System.Windows.Extensions.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.1\Microsoft.Data.SqlClient.dll
@@ -54,7 +60,9 @@ D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\n
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\unix\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Drawing.Common.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Runtime.Caching.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netstandard2.0\System.Security.Cryptography.ProtectedData.dll
+D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Text.Encoding.CodePages.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\runtimes\win\lib\netcoreapp3.0\System.Windows.Extensions.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Domain.dll
 D:\Mon hoc tren lop\Do An\BE\Project_Graduation\Project_Graduation\obj\Release\net6.0\PubTmp\Out\Infrastructure.dll

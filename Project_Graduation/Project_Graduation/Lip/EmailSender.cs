@@ -83,6 +83,10 @@ namespace Project_Graduation.Lip
                 font-size: 12px;
                 color: #888;
             }}
+            .highlight {{
+                color: #007bff;
+                font-weight: bold;
+            }}
         </style>
     </head>
     <body>
@@ -92,19 +96,23 @@ namespace Project_Graduation.Lip
             </div>
             <div class='content'>
                 <p>Chào bạn,</p>
+                <p>Chúng tôi là <span class='highlight'>Nhà hàng Góc Quê</span>, nơi mang đến cho bạn những trải nghiệm ẩm thực đậm chất truyền thống Việt Nam.</p>
                 <p>Chúng tôi nhận được yêu cầu đặt lại mật khẩu của bạn. Vui lòng nhấp vào nút dưới đây để tạo mật khẩu mới:</p>
                 <p>
                     <a href='{message.Content}' class='button'>Đặt lại mật khẩu</a>
                 </p>
-                <p>Nếu bạn không yêu cầu thay đổi mật khẩu này, vui lòng bỏ qua email này.</p>
+                <p>Nếu bạn không yêu cầu thay đổi mật khẩu này, vui lòng bỏ qua email này. Đội ngũ của chúng tôi luôn sẵn sàng hỗ trợ bạn khi cần thiết.</p>
             </div>
             <div class='footer'>
-                <p>&copy; 2024 Công Ty Của Bạn. Tất cả quyền được bảo lưu.</p>
+                <p>Trân trọng,</p>
+                <p>Đội ngũ Nhà hàng Góc Quê</p>
+                <p>&copy; 2024 Góc Quê. Tất cả quyền được bảo lưu.</p>
             </div>
         </div>
     </body>
     </html>"
             };
+
 
             await Task.CompletedTask;
 
