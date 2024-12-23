@@ -39,11 +39,11 @@ namespace Infrastructure.Services.TableService
                 throw new ArgumentNullException(nameof(tableDto));
             }
 
-            var addressExists = await _tableRepository.AnyAsync(x => x.TableNumber == tableDto.TableNumber);
-            if (addressExists)
-            {
-                return new ApiErrorResult<bool>("Bàn  này đã tồn tại.");
-            }
+            //var addressExists = await _tableRepository.AnyAsync(x => x.TableNumber == tableDto.TableNumber);
+            //if (addressExists)
+            //{
+            //    return new ApiErrorResult<bool>("Bàn  này đã tồn tại.");
+            //}
 
 
             var table = _mapper.Map<Table>(tableDto);
