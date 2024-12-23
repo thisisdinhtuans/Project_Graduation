@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "mBz3EqDsIL484VNlTYMhGNBsBjCArjxAFhOTv8VWwstp54iXR/591AzSYsgZEebKA10ToYBP1ugua2BySvnZmg==",
+  "dgSpecHash": "QA541fv5Nb9AwHvEG9AIzE0zVx5c8EjWwBwCFvxt6nnEv/R2f8sNjJY1Gq1C7eccIWCx8q3ywTBg8+SF+Ucn3A==",
   "success": true,
   "projectFilePath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\UnitTest\\UnitTest.csproj",
   "expectedPackageFiles": [
@@ -183,8 +183,8 @@
     "C:\\Users\\AD\\.nuget\\packages\\xunit.extensibility.core\\2.4.2\\xunit.extensibility.core.2.4.2.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\xunit.extensibility.execution\\2.4.2\\xunit.extensibility.execution.2.4.2.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\xunit.runner.visualstudio\\2.4.5\\xunit.runner.visualstudio.2.4.5.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
   "logs": []

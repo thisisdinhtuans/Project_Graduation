@@ -32,11 +32,11 @@ public class AreaService: IAreaService
             throw new ArgumentNullException(nameof(areaDto));
         }
 
-        var addressExists = await _areaRepository.AnyAsync(x => x.AreaName == areaDto.AreaName);
-        if (addressExists)
-        {
-            return new ApiErrorResult<bool>("Khu vực  này đã tồn tại.");
-        }
+        // var addressExists = await _areaRepository.AnyAsync(x => x.AreaName == areaDto.AreaName);
+        // if (addressExists)
+        // {
+        //     return new ApiErrorResult<bool>("Khu vực  này đã tồn tại.");
+        // }
 
 
         var area = _mapper.Map<Area>(areaDto);
