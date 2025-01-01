@@ -161,7 +161,7 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("CorsPolicy", builder => builder
-        .WithOrigins("https://gocque.vercel.app", "http://localhost:3000")
+        .WithOrigins("https://gocque.vercel.app", "http://localhost:3000", "https://nhahanggocque.vercel.app", "https://gocquerestaurant.vercel.app")
         .AllowAnyMethod()
         .AllowAnyHeader()
         .AllowCredentials());

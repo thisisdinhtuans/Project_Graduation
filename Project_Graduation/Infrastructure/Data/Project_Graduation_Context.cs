@@ -114,9 +114,9 @@ namespace Infrastructure.Data
         public DbSet<OrderDetail> OrderDetails { get; set; }
         public DbSet<Restaurant> Restaurants { get; set; }
         public DbSet<Table> Tables { get; set; }
-        public DbSet<Operation> Operations { get; set; }
+        //public DbSet<Operation> Operations { get; set; }
         public DbSet<Module> Modules { get; set; }
-        public DbSet<UserOperation> UserOperations { get; set; }
-        public DbSet<RoleOperation> RoleOperations { get; set; }
+        //public DbSet<UserOperation> UserOperations { get; set; }
+        //public DbSet<RoleOperation> RoleOperations { get; set; }
     }
 }

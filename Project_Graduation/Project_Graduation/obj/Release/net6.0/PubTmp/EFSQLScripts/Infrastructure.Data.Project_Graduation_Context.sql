@@ -556,3 +556,34 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250101093806_InitialCreate5')
+BEGIN
+    DROP TABLE [Operations];
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250101093806_InitialCreate5')
+BEGIN
+    DROP TABLE [RoleOperations];
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250101093806_InitialCreate5')
+BEGIN
+    DROP TABLE [UserOperations];
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250101093806_InitialCreate5')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20250101093806_InitialCreate5', N'6.0.31');
+END;
+GO
+
+COMMIT;
+GO
+
