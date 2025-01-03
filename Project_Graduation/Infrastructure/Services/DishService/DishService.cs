@@ -57,11 +57,11 @@ public class DishService: IDishService
 
     public async Task<ApiResult<bool>> UpdateDishAsync(DishDto dishDto)
     {
-        var addressExists = await _dishRepository.AnyAsync(x => x.Name == dishDto.Name);
-            if (addressExists)
-            {
-                return new ApiErrorResult<bool>("Món  này đã tồn tại.");
-            }
+        //var addressExists = await _dishRepository.AnyAsync(x => x.Name == dishDto.Name);
+        //    if (addressExists)
+        //    {
+        //        return new ApiErrorResult<bool>("Món  này đã tồn tại.");
+        //    }
 
         var dish = await _dishRepository.GetByIdAsync(dishDto.DishId);
         if (dish == null) throw new Exception("Dish not found");
