@@ -11,6 +11,6 @@ public enum EnumOrder
     DaHuy=3
 }
 
-public enum VATORDER {
-    Default = 10
-}
+// public enum VATORDER {
+//     Default = 10
+// }

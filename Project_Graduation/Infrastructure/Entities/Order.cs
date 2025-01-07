@@ -14,7 +14,7 @@ namespace Infrastructure.Entities
         public int NumberOfCustomer { get; set; }
         public int TableID { get; set; }
         public double Payment { get; set; }
-        public double VAT { get; set; }
+        // public double VAT { get; set; }
         public string Phone { get; set; }   
         public int Status { get; set; }
         public bool Deposit { get; set; }

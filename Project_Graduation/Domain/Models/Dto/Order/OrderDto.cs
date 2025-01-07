@@ -13,7 +13,7 @@ public class OrderDto
         public int NumberOfCustomer { get; set; }
         public int TableID { get; set; }
         public double Payment { get; set; }
-        public double VAT { get; set; }
+        // public double VAT { get; set; }
         public string Phone { get; set; }   
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }

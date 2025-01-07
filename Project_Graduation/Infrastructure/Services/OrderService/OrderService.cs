@@ -157,7 +157,7 @@ public class OrderService : IOrderService
         NumberOfCustomer = orderDto.NumberOfCustomer,
         TableID = orderDto.TableID,
         Payment = orderDto.Payment,
-        VAT = orderDto.VAT,
+        // VAT = orderDto.VAT,
         Phone = orderDto.Phone,
         Date = orderDto.Date,
         Time = orderDto.Time,
@@ -311,7 +311,7 @@ public class OrderService : IOrderService
         CreatedBy = createdBy,
         CreatedDate = DateTime.Now,
         Payment= orderDto.Payment,
-        VAT=orderDto.VAT,
+        // VAT=orderDto.VAT,
         NumberOfCustomer=orderDto.NumberOfCustomer,
         Discount=orderDto.Discount,
     };
