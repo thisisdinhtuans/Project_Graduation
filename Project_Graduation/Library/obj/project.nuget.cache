@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "opYn779uoBsovOa6uZC241uqfZLABk4ZmIPHsQZsGxMFLMwac77zGn7r7jnWJmoxH+kySLF62iNQ1lAj0bR2DA==",
+  "dgSpecHash": "UYaprW27EfVhIMHogFsj/7HX+3kqu4CLATIJ2i6Xl19jcDDnYcOIx2XYJ4g4jIHa7KPwosIbDNcSkV/rITqWUw==",
   "success": true,
   "projectFilePath": "D:\\Mon hoc tren lop\\Do An\\BE\\Project_Graduation\\Library\\Library.csproj",
   "expectedPackageFiles": [
@@ -118,8 +118,8 @@
     "C:\\Users\\AD\\.nuget\\packages\\system.windows.extensions\\4.7.0\\system.windows.extensions.4.7.0.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.xml.readerwriter\\4.0.11\\system.xml.readerwriter.4.0.11.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\system.xml.xdocument\\4.0.11\\system.xml.xdocument.4.0.11.nupkg.sha512",
-    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.25\\microsoft.windowsdesktop.app.ref.6.0.25.nupkg.sha512",
+    "C:\\Users\\AD\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.25\\microsoft.netcore.app.ref.6.0.25.nupkg.sha512",
     "C:\\Users\\AD\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.25\\microsoft.aspnetcore.app.ref.6.0.25.nupkg.sha512"
   ],
   "logs": []

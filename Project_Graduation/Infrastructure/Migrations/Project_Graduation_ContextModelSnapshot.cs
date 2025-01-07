@@ -556,6 +556,8 @@ namespace Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DishId");
+
                     b.HasIndex("OrderId");
 
                     b.ToTable("OrderDetails", (string)null);
@@ -787,11 +789,19 @@ namespace Infrastructure.Migrations
 
             modelBuilder.Entity("Infrastructure.Entities.OrderDetail", b =>
                 {
+                    b.HasOne("Infrastructure.Entities.Dish", "Dish")
+                        .WithMany("OrderDetails")
+                        .HasForeignKey("DishId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Infrastructure.Entities.Order", "Order")
                         .WithMany("OrderDetails")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Dish");
 
                     b.Navigation("Order");
                 });
@@ -834,6 +844,11 @@ namespace Infrastructure.Migrations
             modelBuilder.Entity("Infrastructure.Entities.Category", b =>
                 {
                     b.Navigation("Dishes");
+                });
+
+            modelBuilder.Entity("Infrastructure.Entities.Dish", b =>
+                {
+                    b.Navigation("OrderDetails");
                 });
 
             modelBuilder.Entity("Infrastructure.Entities.Order", b =>

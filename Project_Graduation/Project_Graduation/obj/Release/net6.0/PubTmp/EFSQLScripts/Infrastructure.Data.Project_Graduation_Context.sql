@@ -587,3 +587,54 @@ GO
 COMMIT;
 GO
 
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250103083454_InitialCreate6')
+BEGIN
+    CREATE INDEX [IX_OrderDetails_DishId] ON [OrderDetails] ([DishId]);
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250103083454_InitialCreate6')
+BEGIN
+    ALTER TABLE [OrderDetails] ADD CONSTRAINT [FK_OrderDetails_Dishes_DishId] FOREIGN KEY ([DishId]) REFERENCES [Dishes] ([DishId]) ON DELETE CASCADE;
+END;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250103083454_InitialCreate6')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20250103083454_InitialCreate6', N'6.0.31');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250103083738_InitialCreate7')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20250103083738_InitialCreate7', N'6.0.31');
+END;
+GO
+
+COMMIT;
+GO
+
+BEGIN TRANSACTION;
+GO
+
+IF NOT EXISTS(SELECT * FROM [__EFMigrationsHistory] WHERE [MigrationId] = N'20250103084027_InitialCreate8')
+BEGIN
+    INSERT INTO [__EFMigrationsHistory] ([MigrationId], [ProductVersion])
+    VALUES (N'20250103084027_InitialCreate8', N'6.0.31');
+END;
+GO
+
+COMMIT;
+GO
+

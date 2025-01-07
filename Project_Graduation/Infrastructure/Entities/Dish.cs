@@ -10,5 +10,6 @@ namespace Infrastructure.Entities
         public string Image { get; set; }=string.Empty;
         public int CategoryID { get; set; }
         public Category Category { get; set; }
+        public ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

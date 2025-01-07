@@ -15,7 +15,7 @@ public interface IOrderService
     Task<ApiResult<List<OrderDto>>> GetAllOrder();
     Task<ApiResult<bool>> UpdateOrderStatus(int orderId, EnumOrder newStatus);
     Task<bool> ArrangeTableToOrder(int orderId, int tableId);
-    Task<bool> AssignTableToOrder(int orderId, int tableId);
+    //Task<bool> AssignTableToOrder(int orderId, int tableId);
     // Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);
     Task<ApiResult<List<OrderDto>>> ViewOrderHistory(string username);
     Task<bool> UpdateOrderDetailsAsync(OrderDetailUpdateRequest request);

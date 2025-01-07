@@ -150,7 +150,7 @@ public class OrderController : BaseApiController
     [HttpPost("{orderId}/AssignTable")]
     public async Task<IActionResult> AssignTableToOrder(int orderId, [FromBody] AssignTableRequest request)
     {
-        var result = await _orderService.AssignTableToOrder(orderId, request.TableId);
+        var result = await _orderService.ArrangeTableToOrder(orderId, request.TableId);
         if (result)
         {
             return Ok(new { success = true, message = "Bàn đã được gán thành công" });

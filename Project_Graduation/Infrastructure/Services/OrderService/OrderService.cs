@@ -102,6 +102,7 @@ public class OrderService : IOrderService
             throw new Exception("Bàn không khả dụng");
         }
         order.TableID=tableId;
+        order.From = DateTime.Now;
         await _orderRepository.Update(order);
         table.Status=(int)EnumTable.DaDat;
         await _tableRepository.Update(table);
@@ -109,26 +110,27 @@ public class OrderService : IOrderService
         return true;
     }
 
-    public async Task<bool> AssignTableToOrder(int orderId, int tableId)
-    {
-        var order=await _orderRepository.GetByIdAsync(orderId);
-        if(order==null||order.TableID!=0)
-        {
-            return false;
-        }
+    //public async Task<bool> AssignTableToOrder(int orderId, int tableId)
+    //{
+    //    var order=await _orderRepository.GetByIdAsync(orderId);
+    //    if(order==null||order.TableID!=0)
+    //    {
+    //        return false;
+    //    }
 
-        var table=await _tableRepository.GetByIdAsync(tableId);
-        if(table==null || table.Status!=0)
-        {
-            return false;
-        }
+    //    var table=await _tableRepository.GetByIdAsync(tableId);
+    //    if(table==null || table.Status!=0)
+    //    {
+    //        return false;
+    //    }
 
-        order.TableID=tableId;
-        table.Status=(int)EnumTable.DaDat;
-        await _orderRepository.Update(order);
-        await _tableRepository.Update(table);
-        return true;
-    }
+    //    order.TableID=tableId;
+    //    order.From = DateTime.Now;
+    //    table.Status=(int)EnumTable.DaDat;
+    //    await _orderRepository.Update(order);
+    //    await _tableRepository.Update(table);
+    //    return true;
+    //}
 
     public async Task<ApiResult<bool>> CreateOrder(OrderDto orderDto)
     {
@@ -278,6 +280,7 @@ public class OrderService : IOrderService
                 return new ApiErrorResult<bool>("Đơn hàng này không tồn tại");
             }
             order.Status = (int)newStatus;
+            order.To=DateTime.Now;
 
             await _orderRepository.Update(order);
             return new ApiSuccessResult<bool>(true);

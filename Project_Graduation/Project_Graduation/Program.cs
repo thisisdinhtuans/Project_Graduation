@@ -133,7 +133,7 @@ builder.Services.AddIdentityCore<AppUser>(opt =>
 })
     .AddRoles<AppRole>()
     .AddEntityFrameworkStores<Project_Graduation_Context>()
-    .AddDefaultTokenProviders(); ;
+    .AddDefaultTokenProviders();
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(opt=>
@@ -177,6 +177,7 @@ var emailConfig = builder.Configuration
 builder.Services.AddSingleton(emailConfig);
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 var app = builder.Build();
+
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
