@@ -13,13 +13,13 @@ namespace UnitTest.Roles
 {
     public class Edit
     {
-        private readonly Mock<RoleManager<AppRole>> _mockRoleManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly RoleService _roleService;
 
         public Edit()
         {
-            var store = new Mock<IRoleStore<AppRole>>();
-            _mockRoleManager = new Mock<RoleManager<AppRole>>(store.Object, null, null, null, null);
+            var store = new Mock<IRoleStore<Role>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(store.Object, null, null, null, null);
             _roleService = new RoleService(_mockRoleManager.Object);
         }
 
@@ -34,7 +34,7 @@ namespace UnitTest.Roles
                 Description = "Updated Description"
             };
 
-            var role = new AppRole
+            var role = new Role
             {
                 Id = request.Id,
                 Name = "OriginalRole",
@@ -44,7 +44,7 @@ namespace UnitTest.Roles
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(request.Id.ToString()))
                 .ReturnsAsync(role);
 
-            _mockRoleManager.Setup(rm => rm.UpdateAsync(It.IsAny<AppRole>()))
+            _mockRoleManager.Setup(rm => rm.UpdateAsync(It.IsAny<Role>()))
                 .ReturnsAsync(IdentityResult.Success);
 
             // Act
@@ -69,14 +69,14 @@ namespace UnitTest.Roles
             };
 
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(request.Id.ToString()))
-                .ReturnsAsync((AppRole)null);
+                .ReturnsAsync((Role)null);
 
             // Act
             var result = await _roleService.Edit(request);
 
             // Assert
             Assert.False(result);
-            _mockRoleManager.Verify(rm => rm.UpdateAsync(It.IsAny<AppRole>()), Times.Never);
+            _mockRoleManager.Verify(rm => rm.UpdateAsync(It.IsAny<Role>()), Times.Never);
         }
 
     }

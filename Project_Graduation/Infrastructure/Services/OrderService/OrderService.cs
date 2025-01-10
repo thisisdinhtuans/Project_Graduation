@@ -9,6 +9,7 @@ using Domain.Models.Dto.Order;
 using Infrastructure.Entities;
 using Infrastructure.Repositories.OrderDetailRepository;
 using Infrastructure.Repositories.OrderRepository;
+using Infrastructure.Repositories.OrderTableRepository;
 using Infrastructure.Repositories.TableRepository;
 using Microsoft.AspNetCore.Http;
 
@@ -19,14 +20,16 @@ public class OrderService : IOrderService
     private readonly IOrderRepository _orderRepository;
     private readonly IMapper _mapper;
     private readonly IOrderDetailRepository _orderDetailRepository;
+    private readonly IOrderTableRepository _orderTableRepository;
     private readonly ITableRepository _tableRepository;
     private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public OrderService(IOrderRepository orderRepository, IMapper mapper,IOrderDetailRepository orderDetailRepository, ITableRepository tableRepository,IHttpContextAccessor httpContextAccessor)
+    public OrderService(IOrderRepository orderRepository,IOrderTableRepository orderTableRepository, IMapper mapper,IOrderDetailRepository orderDetailRepository, ITableRepository tableRepository,IHttpContextAccessor httpContextAccessor)
     {
         _orderRepository = orderRepository;
         _mapper = mapper;
         _orderDetailRepository = orderDetailRepository;
+        _orderTableRepository=orderTableRepository;
         _tableRepository = tableRepository;
         _httpContextAccessor = httpContextAccessor;
     }
@@ -86,6 +89,7 @@ public class OrderService : IOrderService
     public async Task<bool> ArrangeTableToOrder(int orderId, int tableId)
     {
         var order=await _orderRepository.GetByIdAsync(orderId);
+        // var orderTable=await _orderTableRepository.GetByIdAsync()
         if(order==null)
         {
             throw new Exception("Order không tồn tại");
@@ -101,11 +105,19 @@ public class OrderService : IOrderService
         {
             throw new Exception("Bàn không khả dụng");
         }
-        order.TableID=tableId;
+        
+        
         order.From = DateTime.Now;
         await _orderRepository.Update(order);
         table.Status=(int)EnumTable.DaDat;
         await _tableRepository.Update(table);
+
+        var orderTable = new OrderTable();
+        orderTable.OrderId = orderId;
+        orderTable.TableID = tableId;
+        //orderTable.CreatedDate=DateTime.Now;
+        //orderTable.CreatedBy=_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+        _orderTableRepository.Add(orderTable);
 
         return true;
     }
@@ -132,7 +144,7 @@ public class OrderService : IOrderService
     //    return true;
     //}
 
-    public async Task<ApiResult<bool>> CreateOrder(OrderDto orderDto)
+    public async Task<ApiResult<bool>> CreateOrderByCustomer(OrderDto orderDto)
     {
         if (orderDto == null)
         {
@@ -148,14 +160,15 @@ public class OrderService : IOrderService
         var createdBy = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
         var order = new Order
         {
-            CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+            // CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+            CreatedBy=_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
             CreatedDate = DateTime.Now,
         RestaurantID = orderDto.RestaurantID,
-        UserName = orderDto.UserName,
+        UserId = Guid.Parse(_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value),
         PriceTotal = orderDto.PriceTotal,
         Description = orderDto.Description,
         NumberOfCustomer = orderDto.NumberOfCustomer,
-        TableID = orderDto.TableID,
+        // TableID = orderDto.TableID,
         Payment = orderDto.Payment,
         // VAT = orderDto.VAT,
         Phone = orderDto.Phone,
@@ -174,7 +187,8 @@ public class OrderService : IOrderService
     {
         UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value??"0", 
         CreatedDate= DateTime.Now,
-        CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+        // CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+        CreatedBy=_httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
         OrderId = order.OrderId,  // Gán OrderId đã được tạo
         Price = x.Price,
         Description = x.Description,
@@ -187,6 +201,66 @@ public class OrderService : IOrderService
     await _orderDetailRepository.AddAsync(orderDetails);
 
     return new ApiSuccessResult<bool>(true);
+    }
+
+
+    public async Task<ApiResult<bool>> CreateOrderByReceptionist(OrderDto orderDto)
+    {
+        if (orderDto == null)
+        {
+            throw new ArgumentNullException(nameof(orderDto));
+        }
+
+        // var addressExists = await _orderRepository.AnyAsync(x => x.Address == orderDto.Address);
+        // if (addressExists)
+        // {
+        //     return new ApiErrorResult<bool>("Nhà hàng với địa chỉ này đã tồn tại.");
+        // }
+
+        var createdBy = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value;
+        var order = new Order
+        {
+            // CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+            CreatedBy = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
+            CreatedDate = DateTime.Now,
+            RestaurantID = orderDto.RestaurantID,
+            UserName = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
+            PriceTotal = orderDto.PriceTotal,
+            Description = orderDto.Description,
+            NumberOfCustomer = orderDto.NumberOfCustomer,
+            // TableID = orderDto.TableID,
+            Payment = orderDto.Payment,
+            // VAT = orderDto.VAT,
+            Phone = orderDto.Phone,
+            Date = orderDto.Date,
+            Time = orderDto.Time,
+            Status = orderDto.Status,
+            Deposit = orderDto.Deposit,
+            Discount = orderDto.Discount
+        };
+
+        // Lưu Order vào cơ sở dữ liệu trước
+        await _orderRepository.CreateOrder(order);
+
+        // Sau khi Order được lưu và OrderId được tạo, ta có thể gán nó cho OrderDetailDtos
+        var orderDetails = orderDto.OrderDetailDtos.Select(x => new OrderDetail
+        {
+            UserId = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0",
+            CreatedDate = DateTime.Now,
+            // CreatedBy = !string.IsNullOrEmpty(createdBy) ? createdBy : orderDto.UserName,
+            CreatedBy = _httpContextAccessor.HttpContext.User.FindFirst(ClaimTypes.Name)?.Value,
+            OrderId = order.OrderId,  // Gán OrderId đã được tạo
+            Price = x.Price,
+            Description = x.Description,
+            DishId = x.DishId,
+            NumberOfCustomer = x.NumberOfCustomer,
+            Quantity = x.Quantity
+        }).ToList();
+
+        // Lưu OrderDetails
+        await _orderDetailRepository.AddAsync(orderDetails);
+
+        return new ApiSuccessResult<bool>(true);
     }
 
     // public async Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId)
@@ -290,9 +364,9 @@ public class OrderService : IOrderService
         }
     }
 
-    public async Task<ApiResult<List<OrderDto>>> ViewOrderHistory(string username)
+    public async Task<ApiResult<List<OrderDto>>> ViewOrderHistory(Guid userId)
     {
-        var orders=await _orderRepository.GetByCondition(x=>x.UserName==username);
+        var orders=await _orderRepository.GetByCondition(x=>x.UserId==userId);
         var ordersDto=_mapper.Map<List<OrderDto>>(orders.ToList());
         return new ApiSuccessResult<List<OrderDto>>(ordersDto);
     }
@@ -302,7 +376,7 @@ public class OrderService : IOrderService
         var order = new Order
         {
         RestaurantID = orderDto.RestaurantID,
-        UserName = orderDto.UserName,
+        UserId = orderDto.UserId,
         PriceTotal = orderDto.PriceTotal,
         Date = orderDto.Date,
         Time = orderDto.Time,

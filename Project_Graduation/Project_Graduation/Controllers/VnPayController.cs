@@ -49,7 +49,8 @@ namespace Project_Graduation.Controllers
             HttpContext.Session.SetString("Order", JsonConvert.SerializeObject(order));
 
             // Nếu HttpContext.User.Identity.Name là null, lấy từ order.UserName
-            var createdBy = HttpContext.User.Identity.Name ?? order.UserName;
+            //var createdBy = HttpContext.User.Identity.Name ?? order.UserName;
+            var createdBy = HttpContext.User.Identity.Name;
             HttpContext.Session.SetString("CreatedBy", createdBy);
 
             // Gán UserId, nếu không có thì mặc định là "0"

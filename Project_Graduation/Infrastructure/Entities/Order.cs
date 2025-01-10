@@ -4,7 +4,10 @@ namespace Infrastructure.Entities
     {
         public int OrderId { get; set; }
         public int RestaurantID { get; set; }
-        public string UserName { get; set; }=string.Empty;
+        // public string UserName { get; set; }=string.Empty;
+        public Guid? UserId { get; set; }
+        public string? UserName { get; set; }
+        public User User { get; set; }
         public double PriceTotal { get; set; }
         public string Description { get; set; } = string.Empty;
         public DateTime Date { get; set; }
@@ -12,7 +15,7 @@ namespace Infrastructure.Entities
         public DateTime From { get; set; }
         public DateTime To { get; set; }
         public int NumberOfCustomer { get; set; }
-        public int TableID { get; set; }
+        // public int TableID { get; set; }
         public double Payment { get; set; }
         // public double VAT { get; set; }
         public string Phone { get; set; }   

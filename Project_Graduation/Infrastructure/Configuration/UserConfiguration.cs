@@ -5,11 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configuration;
 
-public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
+public class UserConfiguration : IEntityTypeConfiguration<User>
     {
-        public void Configure(EntityTypeBuilder<AppUser> builder)
+        public void Configure(EntityTypeBuilder<User> builder)
         {
-            builder.ToTable("AppUsers");
+            builder.ToTable("Users");
             builder.Property(x => x.FullName).IsRequired().HasMaxLength(200);            
             builder.Property(x => x.Dob).HasMaxLength(200);
         }

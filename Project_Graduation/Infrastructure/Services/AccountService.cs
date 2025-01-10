@@ -8,10 +8,10 @@ namespace Infrastructure.Services;
 
 public class AccountService: IAccountService
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly TokenService _tokenService;
 
-        public AccountService(UserManager<AppUser> userManager, TokenService tokenService)
+        public AccountService(UserManager<User> userManager, TokenService tokenService)
         {
             _userManager = userManager;
             _tokenService = tokenService;
@@ -43,7 +43,7 @@ public class AccountService: IAccountService
     public async Task<IdentityResult> RegisterAsync(RegisterDto registerDto)
 {
     // Tạo đối tượng AppUser với các thuộc tính từ RegisterDto
-    var user = new AppUser 
+    var user = new User 
     { 
         UserName = registerDto.UserName, 
         Email = registerDto.Email,

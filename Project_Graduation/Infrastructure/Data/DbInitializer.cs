@@ -7,19 +7,19 @@ namespace API.Data;
 
 public static class DbInitializer
 {
-    public static async Task Initialize(Project_Graduation_Context context, UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
+    public static async Task Initialize(Project_Graduation_Context context, UserManager<User> userManager, RoleManager<Role> roleManager)
     {
         if (!await roleManager.Roles.AnyAsync())
         {
-            var roles = new List<AppRole>
+            var roles = new List<Role>
                 {
-                    new AppRole { Name = "Admin", Description = "Quản trị viên hệ thống" },
-                    new AppRole { Name = "Customer", Description = "Khách hàng" },
-                    new AppRole { Name = "Manager", Description = "Quản lý nhà hàng" },
-                    new AppRole { Name = "Owner", Description = "Chủ nhà hàng" },
-                    new AppRole { Name = "Receptionist", Description = "Nhân viên lễ tân" },
-                    new AppRole { Name = "Waiter", Description = "Nhân viên phục vụ" },
-                    new AppRole { Name = "Guest", Description = "Khách vãng lai" }
+                    new Role { Name = "Admin", Description = "Quản trị viên hệ thống" },
+                    new Role { Name = "Customer", Description = "Khách hàng" },
+                    new Role { Name = "Manager", Description = "Quản lý nhà hàng" },
+                    new Role { Name = "Owner", Description = "Chủ nhà hàng" },
+                    new Role { Name = "Receptionist", Description = "Nhân viên lễ tân" },
+                    new Role { Name = "Waiter", Description = "Nhân viên phục vụ" },
+                    new Role { Name = "Guest", Description = "Khách vãng lai" }
                 };
 
             foreach (var role in roles)
@@ -30,7 +30,7 @@ public static class DbInitializer
 
         if (!userManager.Users.Any())
         {
-            var user = new AppUser
+            var user = new User
             {
                 UserName = "bob",
                 Email = "bob@test.com",
@@ -47,7 +47,7 @@ public static class DbInitializer
             await userManager.CreateAsync(user, "Pa$$w0rd");
             await userManager.AddToRoleAsync(user, "Customer");
 
-            var admin = new AppUser
+            var admin = new User
             {
                 UserName = "admin",
                 Email = "admin@test.com",
@@ -67,13 +67,13 @@ public static class DbInitializer
 
         if (!userManager.Users.Any(u => u.Email.Contains("@customer.com")))
         {
-            var customers = new List<AppUser>
+            var customers = new List<User>
     {
-        new AppUser { UserName = "customer1", Email = "customer1@customer.com", FullName = "Customer One", Dob = new DateTime(1995, 3, 15), Status = 1, Gender = true, CCCD = "123456781" },
-        new AppUser { UserName = "customer2", Email = "customer2@customer.com", FullName = "Customer Two", Dob = new DateTime(1990, 6, 20),  Status = 1, Gender = false, CCCD = "123456782" },
-        new AppUser { UserName = "customer3", Email = "customer3@customer.com", FullName = "Customer Three", Dob = new DateTime(1988, 12, 10), Status = 1, Gender = true, CCCD = "123456783" },
-        new AppUser { UserName = "customer4", Email = "customer4@customer.com", FullName = "Customer Four", Dob = new DateTime(1993, 9, 25), Status = 1, Gender = true, CCCD = "123456784" },
-        new AppUser { UserName = "customer5", Email = "customer5@customer.com", FullName = "Customer Five", Dob = new DateTime(1997, 11, 5), Status = 1, Gender = false, CCCD = "123456785" },
+        new User { UserName = "customer1", Email = "customer1@customer.com", FullName = "Customer One", Dob = new DateTime(1995, 3, 15), Status = 1, Gender = true, CCCD = "123456781" },
+        new User { UserName = "customer2", Email = "customer2@customer.com", FullName = "Customer Two", Dob = new DateTime(1990, 6, 20),  Status = 1, Gender = false, CCCD = "123456782" },
+        new User { UserName = "customer3", Email = "customer3@customer.com", FullName = "Customer Three", Dob = new DateTime(1988, 12, 10), Status = 1, Gender = true, CCCD = "123456783" },
+        new User { UserName = "customer4", Email = "customer4@customer.com", FullName = "Customer Four", Dob = new DateTime(1993, 9, 25), Status = 1, Gender = true, CCCD = "123456784" },
+        new User { UserName = "customer5", Email = "customer5@customer.com", FullName = "Customer Five", Dob = new DateTime(1997, 11, 5), Status = 1, Gender = false, CCCD = "123456785" },
     };
 
             foreach (var customer in customers)

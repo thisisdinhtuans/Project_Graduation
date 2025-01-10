@@ -8,7 +8,8 @@ namespace Infrastructure.Services.OrderService;
 
 public interface IOrderService
 {
-    Task<ApiResult<bool>> CreateOrder(OrderDto orderDto);
+    Task<ApiResult<bool>> CreateOrderByCustomer(OrderDto orderDto);
+    Task<ApiResult<bool>> CreateOrderByReceptionist(OrderDto orderDto);
     Task<ApiResult<bool>> UpdateOrder(OrderDto orderDto);
     Task<ApiResult<bool>> DeleteOrder(int id);
     Task<ApiResult<OrderDto>> GetOrderById(int id);
@@ -17,7 +18,7 @@ public interface IOrderService
     Task<bool> ArrangeTableToOrder(int orderId, int tableId);
     //Task<bool> AssignTableToOrder(int orderId, int tableId);
     // Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);
-    Task<ApiResult<List<OrderDto>>> ViewOrderHistory(string username);
+    Task<ApiResult<List<OrderDto>>> ViewOrderHistory(Guid username);
     Task<bool> UpdateOrderDetailsAsync(OrderDetailUpdateRequest request);
     Task<ApiResult<bool>> AddOrder(OrderDto orderDto, string createdBy, string UserId);
     Task<ApiResult<bool>> DeleteDishFromOrderDetail(int orderId, int orderDetailId, int dishId);

@@ -11,6 +11,7 @@ using Infrastructure.Repositories.CategoryRepository;
 using Infrastructure.Repositories.DishRepository;
 using Infrastructure.Repositories.OrderDetailRepository;
 using Infrastructure.Repositories.OrderRepository;
+using Infrastructure.Repositories.OrderTableRepository;
 using Infrastructure.Repositories.TableRepository;
 using Infrastructure.Services;
 using Infrastructure.Services.AreaService;
@@ -106,6 +107,8 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<IDishRepository, DishRepository>();
 builder.Services.AddScoped<IDishService, DishService>();
 
+builder.Services.AddScoped<IOrderTableRepository, OrderTableRepository>();
+
 builder.Services.AddScoped<IOrderDetailRepository, OrderDetailRepository>();
 builder.Services.AddScoped<IOrderDetailService, OrderDetailService>();
 
@@ -127,11 +130,11 @@ builder.Services.AddScoped<IStatisticService, StatisticService>();
 
 builder.Services.AddCors();
 
-builder.Services.AddIdentityCore<AppUser>(opt =>
+builder.Services.AddIdentityCore<User>(opt =>
 {
     opt.User.RequireUniqueEmail = true;
 })
-    .AddRoles<AppRole>()
+    .AddRoles<Role>()
     .AddEntityFrameworkStores<Project_Graduation_Context>()
     .AddDefaultTokenProviders();
 
@@ -214,8 +217,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 var scope = app.Services.CreateScope();
 var context = scope.ServiceProvider.GetRequiredService<Project_Graduation_Context>();
-var userManager = scope.ServiceProvider.GetRequiredService<UserManager<AppUser>>();
-var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<AppRole>>();
+var userManager = scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+var roleManager = scope.ServiceProvider.GetRequiredService<RoleManager<Role>>();
 var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
 try
 {

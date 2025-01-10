@@ -21,10 +21,10 @@ namespace Infrastructure.Services.UserService;
 public class UserService : IUserService
 {
         private readonly Project_Graduation_Context _dbcontext;
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _configuration;
 
-    public UserService(IConfiguration configuration, Project_Graduation_Context dbcontext, UserManager<AppUser> userManager)
+    public UserService(IConfiguration configuration, Project_Graduation_Context dbcontext, UserManager<User> userManager)
         {
             _dbcontext = dbcontext;
             _userManager = userManager;

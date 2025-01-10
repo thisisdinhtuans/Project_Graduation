@@ -18,5 +18,6 @@ namespace Infrastructure.Services.TableService
         Task<ApiResult<bool>> UpdateTableAsync(TableDto restaurantDto);
         Task<ApiResult<bool>> DeleteTableAsync(int id);
         public Task<ApiResult<bool>> UpdateStatusTable(int id, EnumTable status);
+        Task UpdateTableStatusByOrderIdAsync(int orderId,  EnumTable status);
     }
 }

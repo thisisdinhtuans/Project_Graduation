@@ -8,9 +8,9 @@ namespace Infrastructure.Services.RoleService;
 
 public class RoleService : IRoleService
 {
-    private readonly RoleManager<AppRole> _roleManager;
+    private readonly RoleManager<Role> _roleManager;
 
-    public RoleService(RoleManager<AppRole> roleManager)
+    public RoleService(RoleManager<Role> roleManager)
     {
         _roleManager = roleManager;
     }
@@ -80,7 +80,7 @@ public class RoleService : IRoleService
             {
                 return false;
             }
-            var user = new AppRole()
+            var user = new Role()
             {
                 Description = request.Name,
                 Name = request.Name,

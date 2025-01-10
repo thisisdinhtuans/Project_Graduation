@@ -13,13 +13,13 @@ namespace UnitTest.Roles
 {
     public class Create
     {
-        private readonly Mock<RoleManager<AppRole>> _mockRoleManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly RoleService _serviceRole;
 
         public Create()
         {
-            var store = new Mock<IRoleStore<AppRole>>();
-            _mockRoleManager = new Mock<RoleManager<AppRole>>(store.Object, null, null, null, null);
+            var store = new Mock<IRoleStore<Role>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(store.Object, null, null, null, null);
             _serviceRole = new RoleService(_mockRoleManager.Object);
         }
 
@@ -30,9 +30,9 @@ namespace UnitTest.Roles
             var request = new RoleRequestDto { Name = "NewRole" };
 
             _mockRoleManager.Setup(rm => rm.FindByNameAsync(request.Name))
-                .ReturnsAsync((AppRole)null);
+                .ReturnsAsync((Role)null);
 
-            _mockRoleManager.Setup(rm => rm.CreateAsync(It.IsAny<AppRole>()))
+            _mockRoleManager.Setup(rm => rm.CreateAsync(It.IsAny<Role>()))
                 .ReturnsAsync(IdentityResult.Success);
 
             // Act
@@ -40,7 +40,7 @@ namespace UnitTest.Roles
 
             // Assert
             Assert.True(result);
-            _mockRoleManager.Verify(rm => rm.CreateAsync(It.IsAny<AppRole>()), Times.Once);
+            _mockRoleManager.Verify(rm => rm.CreateAsync(It.IsAny<Role>()), Times.Once);
         }
 
         [Fact]
@@ -48,7 +48,7 @@ namespace UnitTest.Roles
         {
             // Arrange
             var request = new RoleRequestDto { Name = "ExistingRole" };
-            var role = new AppRole { Name = "ExistingRole" };
+            var role = new Role { Name = "ExistingRole" };
 
             _mockRoleManager.Setup(rm => rm.FindByNameAsync(request.Name))
                 .ReturnsAsync(role);
@@ -58,7 +58,7 @@ namespace UnitTest.Roles
 
             // Assert
             Assert.False(result);
-            _mockRoleManager.Verify(rm => rm.CreateAsync(It.IsAny<AppRole>()), Times.Never);
+            _mockRoleManager.Verify(rm => rm.CreateAsync(It.IsAny<Role>()), Times.Never);
         }
 
     }

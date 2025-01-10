@@ -27,18 +27,32 @@ public class OrderController : BaseApiController
         }
         return BadRequest(result.Message);
     }
-    [AllowAnonymous]
-    [HttpPost("post")]
-    public async Task<IActionResult> Create([FromBody] OrderDto request)
+    [Authorize(Roles = "Customer,Guest")]
+    [HttpPost("createByCustomer")]
+    public async Task<IActionResult> CreateByCustomer([FromBody] OrderDto request)
     {
         if (!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-        var result = await _orderService.CreateOrder(request);
+        var result = await _orderService.CreateOrderByCustomer(request);
         if (!result.IsSuccessed == true) return BadRequest();
         return Ok(result);
     }
+
+    [Authorize(Roles = "Receptionist")]
+    [HttpPost("createByReceptionist")]
+    public async Task<IActionResult> CreateByReceptionist([FromBody] OrderDto request)
+    {
+        if (!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+        var result = await _orderService.CreateOrderByCustomer(request);
+        if (!result.IsSuccessed == true) return BadRequest();
+        return Ok(result);
+    }
+
     [Authorize(Roles = "Customer,Waiter")]
     [HttpPost("update-order-details")]
     public async Task<IActionResult> UpdateOrderDetails([FromBody] OrderDetailUpdateRequest request)
@@ -163,9 +177,9 @@ public class OrderController : BaseApiController
 
     [Authorize(Roles = "Customer")]
     [HttpGet("ViewOrderHistory/{username}")]
-    public async Task<IActionResult> ViewOrderHistory(string username)
+    public async Task<IActionResult> ViewOrderHistory(Guid userId)
     {
-        var result = await _orderService.ViewOrderHistory(username);
+        var result = await _orderService.ViewOrderHistory(userId);
         if (result.IsSuccessed)
         {
             return Ok(result.ResultObj);

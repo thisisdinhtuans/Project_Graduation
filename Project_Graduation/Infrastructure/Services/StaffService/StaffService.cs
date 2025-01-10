@@ -12,9 +12,9 @@ namespace Infrastructure.Services.StaffService;
 public class StaffService : IStaffService
 {
     private readonly Project_Graduation_Context _dbcontext;
-    private readonly UserManager<AppUser> _userManager;
+    private readonly UserManager<User> _userManager;
 
-    public StaffService(Project_Graduation_Context dbcontext,UserManager<AppUser> userManager)
+    public StaffService(Project_Graduation_Context dbcontext,UserManager<User> userManager)
     {
         _dbcontext = dbcontext;
         _userManager = userManager;
@@ -77,7 +77,7 @@ public class StaffService : IStaffService
                 return false;
             }
 
-            var user = new AppUser()
+            var user = new User()
             {
                 Dob = request.Dob,
                 Email = request.Email,

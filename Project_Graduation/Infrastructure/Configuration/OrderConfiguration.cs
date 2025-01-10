@@ -13,5 +13,10 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
 
             builder.HasKey(x => x.OrderId);
             builder.Property(x => x.OrderId).IsRequired().ValueGeneratedOnAdd();
+
+            builder.HasOne(o => o.User)
+               .WithMany()
+               .HasForeignKey(o => o.UserId)
+               .OnDelete(DeleteBehavior.Cascade);
         }
     }

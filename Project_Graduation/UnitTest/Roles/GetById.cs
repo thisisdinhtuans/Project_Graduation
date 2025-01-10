@@ -12,13 +12,13 @@ namespace UnitTest.Roles
 {
     public class GetById
     {
-        private readonly Mock<RoleManager<AppRole>> _mockRoleManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly RoleService _serviceRole;
 
         public GetById()
         {
-            var store = new Mock<IRoleStore<AppRole>>();
-            _mockRoleManager = new Mock<RoleManager<AppRole>>(store.Object, null, null, null, null);
+            var store = new Mock<IRoleStore<Role>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(store.Object, null, null, null, null);
             _serviceRole = new RoleService(_mockRoleManager.Object);
         }
         [Fact]
@@ -26,7 +26,7 @@ namespace UnitTest.Roles
         {
             // Arrange
             var roleId = Guid.NewGuid();
-            var role = new AppRole { Id = roleId, Name = "Admin", Description = "Administrator Role" };
+            var role = new Role { Id = roleId, Name = "Admin", Description = "Administrator Role" };
 
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(roleId.ToString()))
                 .ReturnsAsync(role);
@@ -48,7 +48,7 @@ namespace UnitTest.Roles
             var roleId = Guid.NewGuid();
 
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(roleId.ToString()))
-                .ReturnsAsync((AppRole)null);  // Role doesn't exist
+                .ReturnsAsync((Role)null);  // Role doesn't exist
 
             // Act & Assert
             var exception = await Assert.ThrowsAsync<Exception>(() => _serviceRole.GetById(roleId.ToString()));

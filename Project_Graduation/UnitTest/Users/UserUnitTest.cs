@@ -20,7 +20,7 @@ namespace UnitTest.Users
         {
             private readonly Mock<IConfiguration> _configurationMock;
             private readonly Mock<Project_Graduation_Context> _contextMock;
-            private readonly Mock<UserManager<AppUser>> _userManagerMock;
+            private readonly Mock<UserManager<User>> _userManagerMock;
             private readonly UserService _userService;
 
             public UserUnitTest()
@@ -28,8 +28,8 @@ namespace UnitTest.Users
                 _configurationMock = new Mock<IConfiguration>();
                 _contextMock = new Mock<Project_Graduation_Context>();
 
-                var userStoreMock = new Mock<IUserStore<AppUser>>();
-                _userManagerMock = new Mock<UserManager<AppUser>>(
+                var userStoreMock = new Mock<IUserStore<User>>();
+                _userManagerMock = new Mock<UserManager<User>>(
                     userStoreMock.Object, null, null, null, null, null, null, null, null);
 
                 _userService = new UserService(
@@ -43,7 +43,7 @@ namespace UnitTest.Users
             {
                 // Arrange
                 var userId = Guid.NewGuid();
-                var user = new AppUser { Id = userId };
+                var user = new User { Id = userId };
 
                 _userManagerMock.Setup(um => um.FindByIdAsync(userId.ToString()))
                     .ReturnsAsync(user);
@@ -65,14 +65,14 @@ namespace UnitTest.Users
                 var userId = Guid.NewGuid();
 
                 _userManagerMock.Setup(um => um.FindByIdAsync(userId.ToString()))
-                    .ReturnsAsync((AppUser)null);
+                    .ReturnsAsync((User)null);
 
                 // Act
                 var result = await _userService.Delete(userId);
 
                 // Assert
                 Assert.False(result);
-                _userManagerMock.Verify(um => um.DeleteAsync(It.IsAny<AppUser>()), Times.Never);
+                _userManagerMock.Verify(um => um.DeleteAsync(It.IsAny<User>()), Times.Never);
             }
 
             [Fact]
@@ -80,7 +80,7 @@ namespace UnitTest.Users
             {
                 // Arrange
                 var userId = Guid.NewGuid();
-                var user = new AppUser
+                var user = new User
                 {
                     Id = userId,
                     FullName = "Test User",
@@ -116,7 +116,7 @@ namespace UnitTest.Users
                 var userId = Guid.NewGuid();
 
                 _userManagerMock.Setup(um => um.FindByIdAsync(userId.ToString()))
-                    .ReturnsAsync((AppUser)null);
+                    .ReturnsAsync((User)null);
 
                 // Act
                 var result = await _userService.GetById(userId);
@@ -132,7 +132,7 @@ namespace UnitTest.Users
             {
                 // Arrange
                 var userId = Guid.NewGuid();
-                var user = new AppUser { Id = userId };
+                var user = new User { Id = userId };
                 var roles = new List<SelectItem>
         {
             new SelectItem { Name = "Manager", Selected = true },
@@ -170,7 +170,7 @@ namespace UnitTest.Users
                 var request = new RoleAssignRequestDto();
 
                 _userManagerMock.Setup(um => um.FindByIdAsync(userId.ToString()))
-                    .ReturnsAsync((AppUser)null);
+                    .ReturnsAsync((User)null);
 
                 // Act
                 var result = await _userService.RoleAssign(userId, request);

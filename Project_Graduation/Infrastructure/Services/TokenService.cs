@@ -11,15 +11,15 @@ namespace Infrastructure.Services;
 
 public class TokenService
     {
-        private readonly UserManager<AppUser> _userManager;
+        private readonly UserManager<User> _userManager;
         private readonly IConfiguration _config;
 
-        public TokenService(UserManager<AppUser> userManager, IConfiguration config)
+        public TokenService(UserManager<User> userManager, IConfiguration config)
         {
             _userManager = userManager;
             _config = config;
         }
-        public async Task<string> GenerateToken(AppUser user)
+        public async Task<string> GenerateToken(User user)
         {
             //Tạo claims về thông tin người dùng
             var claims = new List<Claim>

@@ -105,5 +105,22 @@ namespace Project_Graduation.Controllers
             var result = await _tableService.UpdateStatusTable(tableId, newStatus);
             return Ok(result);
         }
+
+        [HttpPost("UpdateStatusByOrder/{orderId}")]
+        public async Task<IActionResult> UpdateTableStatusByOrder(int orderId, EnumTable status)
+        {
+            if (orderId <= 0)
+                return BadRequest("Invalid parameters.");
+
+            try
+            {
+                await _tableService.UpdateTableStatusByOrderIdAsync(orderId, status);
+                return Ok("Tables updated successfully.");
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
     }
 }

@@ -12,13 +12,13 @@ namespace UnitTest.Roles
 {
     public class Remove
     {
-        private readonly Mock<RoleManager<AppRole>> _mockRoleManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly RoleService _serviceRole;
 
         public Remove()
         {
-            var store = new Mock<IRoleStore<AppRole>>();
-            _mockRoleManager = new Mock<RoleManager<AppRole>>(store.Object, null, null, null, null);
+            var store = new Mock<IRoleStore<Role>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(store.Object, null, null, null, null);
             _serviceRole = new RoleService(_mockRoleManager.Object);
         }
 
@@ -27,7 +27,7 @@ namespace UnitTest.Roles
         {
             // Arrange
             var roleId = Guid.NewGuid();
-            var role = new AppRole { Id = roleId, Name = "RoleToDelete" };
+            var role = new Role { Id = roleId, Name = "RoleToDelete" };
 
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(roleId.ToString()))
                 .ReturnsAsync(role);
@@ -50,14 +50,14 @@ namespace UnitTest.Roles
             var roleId = Guid.NewGuid();
 
             _mockRoleManager.Setup(rm => rm.FindByIdAsync(roleId.ToString()))
-                .ReturnsAsync((AppRole)null);
+                .ReturnsAsync((Role)null);
 
             // Act
             var result = await _serviceRole.Remove(roleId.ToString());
 
             // Assert
             Assert.False(result);
-            _mockRoleManager.Verify(rm => rm.DeleteAsync(It.IsAny<AppRole>()), Times.Never);
+            _mockRoleManager.Verify(rm => rm.DeleteAsync(It.IsAny<Role>()), Times.Never);
         }
 
     }

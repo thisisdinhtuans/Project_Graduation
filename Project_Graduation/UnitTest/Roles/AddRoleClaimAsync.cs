@@ -13,13 +13,13 @@ namespace UnitTest.Roles
 {
     public class AddRoleClaimAsync
     {
-        private readonly Mock<RoleManager<AppRole>> _mockRoleManager;
+        private readonly Mock<RoleManager<Role>> _mockRoleManager;
         private readonly RoleService _serviceRole;
 
         public AddRoleClaimAsync()
         {
-            var store = new Mock<IRoleStore<AppRole>>();
-            _mockRoleManager = new Mock<RoleManager<AppRole>>(store.Object, null, null, null, null);
+            var store = new Mock<IRoleStore<Role>>();
+            _mockRoleManager = new Mock<RoleManager<Role>>(store.Object, null, null, null, null);
             _serviceRole = new RoleService(_mockRoleManager.Object);
         }
         [Fact]
@@ -29,7 +29,7 @@ namespace UnitTest.Roles
             var roleName = "Admin";
             var claim = new Claim("Permission", "CanEdit");
 
-            var role = new AppRole { Name = roleName };
+            var role = new Role { Name = roleName };
 
             _mockRoleManager.Setup(rm => rm.FindByNameAsync(roleName))
                 .ReturnsAsync(role);
@@ -53,14 +53,14 @@ namespace UnitTest.Roles
             var claim = new Claim("Permission", "CanEdit");
 
             _mockRoleManager.Setup(rm => rm.FindByNameAsync(roleName))
-                .ReturnsAsync((AppRole)null);
+                .ReturnsAsync((Role)null);
 
             // Act
             var result = await _serviceRole.AddRoleClaimAsync(roleName, claim);
 
             // Assert
             Assert.False(result);
-            _mockRoleManager.Verify(rm => rm.AddClaimAsync(It.IsAny<AppRole>(), claim), Times.Never);
+            _mockRoleManager.Verify(rm => rm.AddClaimAsync(It.IsAny<Role>(), claim), Times.Never);
         }
     }
 }

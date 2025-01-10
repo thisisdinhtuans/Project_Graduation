@@ -12,6 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Infrastructure.Repositories.AreaRepository;
 using Domain.Enums;
+using Infrastructure.Repositories.OrderTableRepository;
 
 namespace Infrastructure.Services.TableService
 {
@@ -19,13 +20,15 @@ namespace Infrastructure.Services.TableService
     {
         private readonly ITableRepository _tableRepository;
         private readonly IAreaRepository _areaRepository;
+        private readonly IOrderTableRepository _orderTableRepository;
         private readonly IMapper _mapper;
 
-        public TableService(ITableRepository tableRepository, IAreaRepository areaRepository, IMapper mapper)
+        public TableService(ITableRepository tableRepository,IOrderTableRepository orderTableRepository, IAreaRepository areaRepository, IMapper mapper)
         {
             _tableRepository = tableRepository;
             _areaRepository = areaRepository;
             _mapper = mapper;
+            _orderTableRepository = orderTableRepository;
         }
         public async Task<ApiResult<bool>> CreateTableAsync(CreateTableDto tableDto)
         {
@@ -136,6 +139,29 @@ namespace Infrastructure.Services.TableService
             {
                 return new ApiErrorResult<bool>($"Lỗi khi cập nhật trạng thái: {ex.Message}");
             }
+        }
+
+        public async Task UpdateTableStatusByOrderIdAsync(int orderId, EnumTable status)
+        {
+            // Lấy danh sách TableId từ OrderTable
+            var tableIds = await _orderTableRepository.GetTableIdsByOrderIdAsync(orderId);
+
+            if (!tableIds.Any())
+            {
+                throw new Exception("No tables found for the given OrderId.");
+            }
+
+            // Lấy danh sách Table từ TableIds
+            var tables = await _orderTableRepository.GetTablesByIdsAsync(tableIds);
+
+            // Cập nhật trạng thái của từng Table
+            foreach (var table in tables)
+            {
+                table.Status = (int)status;
+            }
+
+            // Lưu thay đổi
+            await _orderTableRepository.SaveAllAsync();
         }
     }
 

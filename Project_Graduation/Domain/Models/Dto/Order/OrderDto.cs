@@ -7,11 +7,12 @@ public class OrderDto
 {
         public int OrderId { get; set; }
         public int RestaurantID { get; set; }
-        public string UserName { get; set; }=string.Empty;
+        public Guid? UserId { get; set; }
+        public string? UserName { get; set; }
         public double PriceTotal { get; set; }
         public string Description { get; set; } = string.Empty;
         public int NumberOfCustomer { get; set; }
-        public int TableID { get; set; }
+        // public int TableID { get; set; }
         public double Payment { get; set; }
         // public double VAT { get; set; }
         public string Phone { get; set; }   

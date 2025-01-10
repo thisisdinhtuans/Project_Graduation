@@ -5,12 +5,11 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Infrastructure.Configuration;
 
-public class AppRoleConfiguration: IEntityTypeConfiguration<AppRole>
+public class RoleConfiguration: IEntityTypeConfiguration<Role>
 {
-    public void Configure(EntityTypeBuilder<AppRole> builder)
+    public void Configure(EntityTypeBuilder<Role> builder)
         {
-            builder.ToTable("AppRoles");
-
+            builder.ToTable("Roles");
             builder.Property(x => x.Description).IsRequired();
         }
 }
